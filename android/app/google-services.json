@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358990322527",
+    "project_id": "tta-app-2c708",
+    "storage_bucket": "tta-app-2c708.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358990322527:android:d7c80a10f0055a8861b4ea",
+        "android_client_info": {
+          "package_name": "com.iqneting.places_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358990322527-qa41p6t9kq5soridmvt8lo3v7g9982sr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAooU8mIMwUlN7ff68cRS7ppxTuOUY1Vu4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358990322527-qa41p6t9kq5soridmvt8lo3v7g9982sr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
