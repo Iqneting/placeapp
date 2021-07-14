@@ -58,7 +58,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       key: scaffoldKey,
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomInset: false,
       drawer: MenuBar(),
       body: _stack(),
     );

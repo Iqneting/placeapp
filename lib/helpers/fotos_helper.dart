@@ -96,21 +96,43 @@ Future<PickedFile> cargarFoto(BuildContext context, String title,
   }
   final option = await showDialog(
       context: context,
-      child: SimpleDialog(
-        title: Text(title),
-        children: <Widget>[
-          SimpleDialogOption(
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: Text(title),
+          children: <Widget>[
+            SimpleDialogOption(
+                child: Column(
+                  children: [
+                    Row(
+                      children: <Widget>[
+                        FaIcon(
+                          FontAwesomeIcons.camera,
+                          size: 15.0,
+                        ),
+                        SizedBox(width: 10.0),
+                        Expanded(
+                          child: Text('Tomar foto'),
+                        ),
+                      ],
+                    ),
+                    Divider(),
+                  ],
+                ),
+                onPressed: () {
+                  Navigator.pop(context, 1);
+                }),
+            SimpleDialogOption(
               child: Column(
                 children: [
                   Row(
                     children: <Widget>[
                       FaIcon(
-                        FontAwesomeIcons.camera,
+                        FontAwesomeIcons.images,
                         size: 15.0,
                       ),
                       SizedBox(width: 10.0),
                       Expanded(
-                        child: Text('Tomar foto'),
+                        child: Text('Elegir una foto de la galería'),
                       ),
                     ],
                   ),
@@ -118,32 +140,12 @@ Future<PickedFile> cargarFoto(BuildContext context, String title,
                 ],
               ),
               onPressed: () {
-                Navigator.pop(context, 1);
-              }),
-          SimpleDialogOption(
-            child: Column(
-              children: [
-                Row(
-                  children: <Widget>[
-                    FaIcon(
-                      FontAwesomeIcons.images,
-                      size: 15.0,
-                    ),
-                    SizedBox(width: 10.0),
-                    Expanded(
-                      child: Text('Elegir una foto de la galería'),
-                    ),
-                  ],
-                ),
-                Divider(),
-              ],
+                Navigator.pop(context, 2);
+              },
             ),
-            onPressed: () {
-              Navigator.pop(context, 2);
-            },
-          ),
-        ],
-      ));
+          ],
+        );
+      });
 
   /* final option = await showModal(context); */
 
@@ -164,7 +166,8 @@ Future<PickedFile> cargarFoto(BuildContext context, String title,
 Future<String> cargarSubirFoto(BuildContext context) async {
   final option = await showDialog(
       context: context,
-      child: SimpleDialog(
+      builder: (BuildContext context) {
+      return SimpleDialog(
         title: Text('Cargar foto'),
         children: <Widget>[
           SimpleDialogOption(
@@ -199,7 +202,7 @@ Future<String> cargarSubirFoto(BuildContext context) async {
             },
           ),
         ],
-      ));
+      ); });
 
   if (option == null) return null;
   String url;
