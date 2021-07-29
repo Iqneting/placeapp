@@ -25,9 +25,12 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
   TextEditingController _placaController = TextEditingController();
   TextEditingController _telefonoSeguroController = TextEditingController();
 
-  TextEditingController _fechaVencimientoLicenciaController = TextEditingController();
-  TextEditingController _fechaVencimientoPolizaController = TextEditingController();
-  TextEditingController _vencimientoVerificacioController = TextEditingController();
+  TextEditingController _fechaVencimientoLicenciaController =
+      TextEditingController();
+  TextEditingController _fechaVencimientoPolizaController =
+      TextEditingController();
+  TextEditingController _vencimientoVerificacioController =
+      TextEditingController();
   TextEditingController _fechaPagoTenenciaController = TextEditingController();
 
   MediaQueryData mq;
@@ -59,18 +62,21 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           user = await userService.getUsuario(emailArg);
           user.licencia = _licenciaController.text;
           user.seguro = _seguroController.text;
+
           user.placa = _placaController.text;
           user.telefonoSeguro = _telefonoSeguroController.text;
           user.fechaPagoTenencia = _fechaPagoTenenciaController.text;
-          user.fechaVencimientoLicencia = _fechaVencimientoLicenciaController.text;
+          user.fechaVencimientoLicencia =
+              _fechaVencimientoLicenciaController.text;
           user.fechaVencimientoPoliza = _fechaVencimientoPolizaController.text;
+          print(user);
           bandera = await userService.updateUser(user, user.id);
         }
 
         if (bandera) {
-          success(context, "Cuenta creada", "Su registro ha sido exitoso",
+          success(context, "Perfil Completado", "Su registro ha sido exitoso",
               f: () {
-                preferences.telefonoPoliza = _telefonoSeguroController.text;
+            preferences.telefonoPoliza = _telefonoSeguroController.text;
             Navigator.pushReplacementNamed(context, home);
           });
           setState(() {
@@ -101,7 +107,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
     );
 
     final placaField = TextFormField(
-      textCapitalization: TextCapitalization.characters,
+        textCapitalization: TextCapitalization.characters,
         controller: _placaController,
         keyboardType: TextInputType.text,
         style: TextStyle(color: Colors.black),
@@ -119,7 +125,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             return 'Ingrese su placa';
           }
 
-         /* if (value.trim().length < 9 || value.trim().length > 9) {
+          /* if (value.trim().length < 9 || value.trim().length > 9) {
             return 'Su placa debe contener 9 caracteres';
           }*/
 
@@ -153,8 +159,8 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
         onSaved: (String value) {
           _licenciaController.text = value;
         });
-      
-      final fechaVencimientolicenciaField = TextFormField(
+
+    final fechaVencimientolicenciaField = TextFormField(
         controller: _fechaVencimientoLicenciaController,
         keyboardType: TextInputType.text,
         enabled: false,
@@ -254,7 +260,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           _fechaVencimientoPolizaController.text = value;
         });
 
-        final fechaPagoTeneciaField = TextFormField(
+    final fechaPagoTeneciaField = TextFormField(
         controller: _fechaPagoTenenciaController,
         keyboardType: TextInputType.datetime,
         enabled: false,
@@ -279,7 +285,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           _fechaPagoTenenciaController.text = value;
         });
 
-     final telefonoSeguroField = TextFormField(
+    final telefonoSeguroField = TextFormField(
         controller: _telefonoSeguroController,
         keyboardType: TextInputType.phone,
         enabled: true,
@@ -378,9 +384,12 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
               context: context,
-              initialDate:
-                  _dateVencimientoVerificacion == null ? DateTime.now() : _dateVencimientoVerificacion,
-              firstDate: _dateVencimientoVerificacion == null ? DateTime.now() : _dateVencimientoVerificacion,
+              initialDate: _dateVencimientoVerificacion == null
+                  ? DateTime.now()
+                  : _dateVencimientoVerificacion,
+              firstDate: _dateVencimientoVerificacion == null
+                  ? DateTime.now()
+                  : _dateVencimientoVerificacion,
               lastDate: DateTime(2050),
               fieldLabelText: 'Fecha de vencimiento de su seguro',
               fieldHintText: 'Fecha de vencimiento de su seguro',
@@ -397,7 +406,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
         )
       ],
     );
-     final calendarFechaPagoTendencia = Row(
+    final calendarFechaPagoTendencia = Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         RaisedButton(
@@ -408,9 +417,12 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
               context: context,
-              initialDate:
-                  _datePagoTendencia == null ? DateTime.now() : _datePagoTendencia,
-              firstDate: _datePagoTendencia == null ? DateTime.now() : _datePagoTendencia,
+              initialDate: _datePagoTendencia == null
+                  ? DateTime.now()
+                  : _datePagoTendencia,
+              firstDate: _datePagoTendencia == null
+                  ? DateTime.now()
+                  : _datePagoTendencia,
               lastDate: DateTime(2050),
               fieldLabelText: 'Fecha de vencimiento de su seguro',
               fieldHintText: 'Fecha de vencimiento de su seguro',
@@ -427,27 +439,28 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
         )
       ],
     );
-    final fields =  SingleChildScrollView(
-              child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            placaField,
-            telefonoSeguroField,
-            numeroPolizaSeguroField,
-            vechaVencimientoPolizaField,
-            calendarSeguro,
-            licenciaField,
-            fechaVencimientolicenciaField,
-            calendarLicencia,
-            fechaVencimientoVerificacionField,
-            calendarVencimientoVerificacion,
-            fechaPagoTeneciaField,
-            calendarFechaPagoTendencia,
-            SizedBox(height: 15,)
-          ],
-        ),
-      );
-    
+    final fields = SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          placaField,
+          telefonoSeguroField,
+          numeroPolizaSeguroField,
+          vechaVencimientoPolizaField,
+          calendarSeguro,
+          licenciaField,
+          fechaVencimientolicenciaField,
+          calendarLicencia,
+          fechaVencimientoVerificacionField,
+          calendarVencimientoVerificacion,
+          fechaPagoTeneciaField,
+          calendarFechaPagoTendencia,
+          SizedBox(
+            height: 15,
+          )
+        ],
+      ),
+    );
 
     final registerButton = Material(
       elevation: 5.0,

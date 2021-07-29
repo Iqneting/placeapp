@@ -3,10 +3,9 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:places_app/components/chilangos_button.dart';
 import 'package:places_app/models/tutoriales_model.dart';
 import 'package:places_app/pages/home_page.dart';
+import 'package:places_app/shared/user_preferences.dart';
 
 import 'item_tutorial.dart';
-
-
 
 class SwiperTutorial extends StatefulWidget {
   final List<Tutorial> listaTutorial;
@@ -23,19 +22,19 @@ class _SwiperTutorialState extends State<SwiperTutorial> {
   int listUsuarioLenght;
   bool activarEmpezar = false;
   int indexGlobal = 0;
+  UserPreferences userPrefrences = new UserPreferences();
 
-
- @override
+  @override
   void initState() {
     super.initState();
-   imageListUsuario =  widget.listaTutorial.map((e) => ItemTutorial(
-       img: e.imagen,
-        
-        title: e.titulo,
-        message:
-            e.descripcion,
-      )).toList();
-   
+    imageListUsuario = widget.listaTutorial
+        .map((e) => ItemTutorial(
+              img: e.imagen,
+              title: e.titulo,
+              message: e.descripcion,
+            ))
+        .toList();
+
     /*imageListUsuario = [
       ItemTutorial(
         
@@ -63,7 +62,6 @@ class _SwiperTutorialState extends State<SwiperTutorial> {
       ),
     ];*/
 
-   
     listUsuarioLenght = imageListUsuario.length;
   }
 
@@ -81,16 +79,15 @@ class _SwiperTutorialState extends State<SwiperTutorial> {
           children: [
             Swiper(
               index: _swiperIndex,
-             // layout: SwiperLayout.TINDER ,
+              // layout: SwiperLayout.TINDER ,
               itemWidth: width,
               itemHeight: height,
               itemBuilder: (BuildContext context, int index) {
-               
                 return imageListUsuario[index];
               },
               viewportFraction: 0.8,
               scale: 0.9,
-              itemCount : imageListUsuario.length,
+              itemCount: imageListUsuario.length,
               pagination: new SwiperPagination(),
               controller: _controller,
               onIndexChanged: (data) {
@@ -114,9 +111,13 @@ class _SwiperTutorialState extends State<SwiperTutorial> {
                             ? ChilangosButton(
                                 label: "Comenzar",
                                 //textColor: Colors.black,
-                                onPressed: () => Navigator.of(context).popAndPushNamed(HomePage.routeName))
+                                onPressed: () {
+                                  Navigator.of(context)
+                                      .popAndPushNamed(HomePage.routeName);
+                                  userPrefrences.setIsFirstLoad = true;
+                                })
                             : ChilangosButton(
-                                label: "Sigiente",
+                                label: "Siguiente",
                                 //textColor: Colors.black,
                                 onPressed: () => _buildControler())),
                     Expanded(
@@ -133,16 +134,15 @@ class _SwiperTutorialState extends State<SwiperTutorial> {
   }
 
   _buildNextButton(int index) {
-   
-      if (listUsuarioLenght - 1 == index) {
-        setState(() {
-          activarEmpezar = true;
-          _swiperIndex = listUsuarioLenght - 1;
-        });
-      }
-    
+    if (listUsuarioLenght - 1 == index) {
+      setState(() {
+        activarEmpezar = true;
+        _swiperIndex = listUsuarioLenght - 1;
+      });
+    }
   }
-   _buildControler() {
+
+  _buildControler() {
     print("onprres");
     _controller.next();
   }

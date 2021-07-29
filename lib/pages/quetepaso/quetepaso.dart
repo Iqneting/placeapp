@@ -41,7 +41,7 @@ class QueTePasoPage extends StatelessWidget {
       icon: Icon(
         Icons.cancel,
         color: kBaseColor,
-        size: 35.0,
+        size: 40.0,
       ),
       onPressed: () {
         Navigator.pop(context);
@@ -54,7 +54,7 @@ class QueTePasoPage extends StatelessWidget {
       child: Text(
         "¿Qué te pasó?",
         style: TextStyle(
-          fontSize: 27.0,
+          fontSize: 35.0,
           fontWeight: FontWeight.w500,
         ),
       ),
@@ -125,7 +125,6 @@ class QueTePasoPage extends StatelessWidget {
               decoration: BoxDecoration(
                 //color: Colors.blue.shade200,
                 shape: BoxShape.circle,
-                
               ),
               child: Center(
                 child: FaIcon(
@@ -191,11 +190,18 @@ class QueTePasoPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Row(
-                children: [Expanded(child: Container(),),FaIcon(
-                  Icons.policy,
-                  color: Colors.white,
-                ),
-                Expanded(child: Container(),)],
+                children: [
+                  Expanded(
+                    child: Container(),
+                  ),
+                  FaIcon(
+                    Icons.policy,
+                    color: Colors.white,
+                  ),
+                  Expanded(
+                    child: Container(),
+                  )
+                ],
               ),
               Row(
                 children: [
@@ -214,13 +220,17 @@ class QueTePasoPage extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Divider(
                 height: 2,
                 color: Colors.white,
                 thickness: 3,
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Row(
                 children: [
                   Text(
@@ -268,7 +278,7 @@ class QueTePasoPage extends StatelessWidget {
   }
 
   Widget _buildTuveUnAccidente() {
-   
+    print(preferences);
     return Container(
       width: double.infinity,
       height: 220,
@@ -291,12 +301,19 @@ class QueTePasoPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-               Row(
-                children: [Expanded(child: Container(),),FaIcon(
-                  FontAwesomeIcons.carCrash,
-                  color: Colors.white,
-                ),
-                Expanded(child: Container(),)],
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(),
+                  ),
+                  FaIcon(
+                    FontAwesomeIcons.carCrash,
+                    color: Colors.white,
+                  ),
+                  Expanded(
+                    child: Container(),
+                  )
+                ],
               ),
               Row(
                 children: [
@@ -315,13 +332,17 @@ class QueTePasoPage extends StatelessWidget {
                   )
                 ],
               ),
-               SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Divider(
                 height: 2,
                 color: Colors.white,
                 thickness: 3,
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Row(
                 children: [
                   Text(
@@ -361,7 +382,6 @@ class QueTePasoPage extends StatelessWidget {
                       })
                 ],
               ),
-             
             ],
           ),
         ),
@@ -392,12 +412,19 @@ class QueTePasoPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-               Row(
-                children: [Expanded(child: Container(),),FaIcon(
-                  FontAwesomeIcons.search,
-                  color: Colors.white,
-                ),
-                Expanded(child: Container(),)],
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(),
+                  ),
+                  FaIcon(
+                    FontAwesomeIcons.search,
+                    color: Colors.white,
+                  ),
+                  Expanded(
+                    child: Container(),
+                  )
+                ],
               ),
               Row(
                 children: [
@@ -416,13 +443,17 @@ class QueTePasoPage extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Divider(
                 height: 2,
                 color: Colors.white,
                 thickness: 3,
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -471,7 +502,7 @@ class QueTePasoPage extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: 200,
-       decoration: BoxDecoration(
+      decoration: BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(50), topRight: Radius.circular(50)),
@@ -490,12 +521,19 @@ class QueTePasoPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-               Row(
-                children: [Expanded(child: Container(),),FaIcon(
-                  Icons.car_repair,
-                  color: Colors.white,
-                ),
-                Expanded(child: Container(),)],
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(),
+                  ),
+                  FaIcon(
+                    Icons.car_repair,
+                    color: Colors.white,
+                  ),
+                  Expanded(
+                    child: Container(),
+                  )
+                ],
               ),
               Row(
                 children: [
@@ -514,18 +552,22 @@ class QueTePasoPage extends StatelessWidget {
                   )
                 ],
               ),
-               SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Divider(
                 height: 2,
                 color: Colors.white,
                 thickness: 3,
               ),
-              SizedBox(height: 5,),
+              SizedBox(
+                height: 5,
+              ),
               Row(
                 children: [
                   Expanded(
                       child: Text(
-                    "Busca tu boleta de la infracción en tu parabrisas. En  ella vendrá el monto de la multa y el teléfono para que retiren tu inmovilizador. Puedes pagar en tiendas 7eleven.".toLowerCase(),
+                    "Busca tu boleta de la infracción en tu parabrisas. En  ella vendrá el monto de la multa y el teléfono para que retiren tu inmovilizador. Puedes pagar en tiendas 7Eleven.",
                     style: TextStyle(
                         color: kBaseTextTitle,
                         fontSize: 20,

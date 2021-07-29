@@ -39,7 +39,7 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
     if (hasAfiliacion) {
       isAprobado = preferences.afiliacionAprobada;
     }
-   afiliado = await afiliadoService.getByUser(preferences.email);
+    afiliado = await afiliadoService.getByUser(preferences.email);
 
     setState(() {});
 
@@ -82,7 +82,7 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
       body = _enEsperaDeAprobacion();
     }
     if (hasAfiliacion && isAprobado) {
-      body =  _buildDatosAfiliado();
+      body = _buildDatosAfiliado();
     }
 
     return SafeArea(
@@ -92,28 +92,26 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
     );
   }
 
-  Widget _buildDatosAfiliado(){
+  Widget _buildDatosAfiliado() {
     return SingleChildScrollView(
-          child: Container(
+      child: Container(
         width: double.infinity,
         //height: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                _buildImgPotada(),
-                TitleComponent("Fotos"),
-                FotosSlider(fotos: afiliado.fotos),
-                SizedBox(height: 20.0),
-                _details(),
-              ],
-            ),
+          children: [
+            _buildImgPotada(),
+            TitleComponent("Fotos"),
+            FotosSlider(fotos: afiliado.fotos),
+            SizedBox(height: 20.0),
+            _details(),
+          ],
         ),
+      ),
     );
-
-    
   }
 
-  Widget _buildImgPotada(){
+  Widget _buildImgPotada() {
     return Container(
       height: _size.height * 0.33,
       padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -122,12 +120,12 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
         children: [
           Container(
             height: _size.height * 0.25,
-            child: FadeInImage( 
-        image: NetworkImage(afiliado.img),
-        placeholder: AssetImage('assets/images/logo.png'),
-        fit: BoxFit.contain,
-        //width: double.infinity,
-        ),
+            child: FadeInImage(
+              image: NetworkImage(afiliado.img),
+              placeholder: AssetImage('assets/images/logo.png'),
+              fit: BoxFit.contain,
+              //width: double.infinity,
+            ),
           ),
           Text(
             afiliado.categoria,
@@ -141,6 +139,7 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
       ),
     );
   }
+
   Widget _details() {
     return Container(
       //width: double.infinity,
@@ -161,12 +160,8 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
                 Icon(Icons.place, color: kBaseColor),
                 afiliado.ubicacion,
               ),
-              _rowMapa(
-                Icon(Icons.place, color: kBaseColor),
-                afiliado.ubicacion,
-                afiliado.latitud,
-                afiliado.longitud
-              ),
+              _rowMapa(Icon(Icons.place, color: kBaseColor), afiliado.ubicacion,
+                  afiliado.latitud, afiliado.longitud),
               _buildEditar()
             ],
           ),
@@ -175,7 +170,7 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
     );
   }
 
-   Widget _rating2(double value, int total) {
+  Widget _rating2(double value, int total) {
     if (value == 0.0) {
       return Container();
     }
@@ -264,7 +259,7 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
     );
   }
 
-    Widget _rowTelefono(Icon icon, String telefono) {
+  Widget _rowTelefono(Icon icon, String telefono) {
     if (telefono == null) return Container();
     return Container(
       padding: EdgeInsets.only(left: 15.0),
@@ -306,7 +301,8 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
       ),
     );
   }
-  Widget _rowMapa(Icon icon,String lugar, double latitud,double longitud) {
+
+  Widget _rowMapa(Icon icon, String lugar, double latitud, double longitud) {
     if (latitud == null) return Container();
     return Container(
       padding: EdgeInsets.only(left: 15.0),
@@ -318,14 +314,13 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
             margin: EdgeInsets.only(right: 15.0),
             child: icon,
           ),
-            Text(
-                  "Como llegar" ?? '',
-                  style: TextStyle(
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-            
+          Text(
+            "Como llegar" ?? '',
+            style: TextStyle(
+              fontSize: 17.0,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
           Expanded(
             child: Container(),
           ),
@@ -339,37 +334,53 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
                 print(
                     availableMaps); // [AvailableMap { mapName: Google Maps, mapType: google }, ...]
                 await availableMaps.first.showMarker(
-                  coords: Coords((latitud==0.0)?19.2529912:latitud, (longitud==0.0)?-99.5791536:longitud,),
+                  coords: Coords(
+                    (latitud == 0.0) ? 19.2529912 : latitud,
+                    (longitud == 0.0) ? -99.5791536 : longitud,
+                  ),
                   title: afiliado.nombre,
                   description: "",
                 );
               }),
-              SizedBox( width: 20,)
+          SizedBox(
+            width: 20,
+          )
         ],
       ),
     );
   }
 
-  Widget _buildEditar(){
+  Widget _buildEditar() {
     return Container(
       color: Colors.blueAccent,
       padding: EdgeInsets.only(left: 15.0),
       margin: EdgeInsets.only(bottom: 10.0),
       width: _size.width * 0.9,
-      child: Row(children: [
-        Text("Editar Datos",style: TextStyle(color: Colors.white),),
-        Expanded(child: Container(),),
-        IconButton(icon: Icon(Icons.edit,color: Colors.white,), onPressed: ()=> _buildEditData())
-      ],),
+      child: Row(
+        children: [
+          Text(
+            "Editar Datos",
+            style: TextStyle(color: Colors.white),
+          ),
+          Expanded(
+            child: Container(),
+          ),
+          IconButton(
+              icon: Icon(
+                Icons.edit,
+                color: Colors.white,
+              ),
+              onPressed: () => _buildEditData())
+        ],
+      ),
     );
-
   }
-  _buildEditData(){
+
+  _buildEditData() {
     return Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditarAfiliadoPage(afiliado: afiliado)
-                    ),
-                  );
+      context,
+      MaterialPageRoute(
+          builder: (context) => EditarAfiliadoPage(afiliado: afiliado)),
+    );
   }
 }

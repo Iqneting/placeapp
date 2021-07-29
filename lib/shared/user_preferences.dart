@@ -62,6 +62,22 @@ class UserPreferences {
     return _prefs.getString("telefonoPoliza") ?? '123456';
   }
 
+  set numeroPoliza(String tipo) {
+    _prefs.setString("numeroPoliza", tipo);
+  }
+
+  get numeroPoliza {
+    return _prefs.getString("numeroPoliza") ?? '123456';
+  }
+
+  get isFirstLoad {
+    return _prefs.getBool("isFirstLoad") ?? false;
+  }
+
+  set setIsFirstLoad(bool firstLoad) {
+    _prefs.setBool("isFirstLoad", firstLoad);
+  }
+
   factory UserPreferences() {
     return _instance;
   }

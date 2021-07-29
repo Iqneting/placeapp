@@ -11,9 +11,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   UserPreferences userPrefrences = new UserPreferences();
-  await userPrefrences.initPrefs();
 
-  String initialRoute;
+  await userPrefrences.initPrefs();
+  String initialRoute =
+      !userPrefrences.isFirstLoad ? routes.tutorial : routes.home;
+
   initialRoute = routes.tutorial;
   runApp(MyApp(initialRoute));
 }

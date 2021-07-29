@@ -84,21 +84,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 licencia: "",
                 nombre: _nameController.text,
                 placa: "",
-                telefonoSeguro :"",
+                telefonoSeguro: "",
                 seguro: "",
                 tokenPush: tokenPush);
             await usuario.save(_emailController.text);
             preferences.email = _emailController.text.toLowerCase();
             preferences.tipoUsuario = "normal";
-             success(context, "Cuenta creada", "Su registro ha sido exitoso",
-              f: () {
-            Navigator.pushReplacementNamed(context, home);
-          });
-           /* Navigator.pushReplacementNamed(context, registerExtra,
+            success(context, "Perfil Completado", "Su registro ha sido exitoso",
+                f: () {
+              Navigator.pushReplacementNamed(context, home);
+            });
+            /* Navigator.pushReplacementNamed(context, registerExtra,
                 arguments: _emailController.text);*/
           }
           await user.user.updateProfile(displayName: _nameController.text);
-          success(context, "Cuenta creada", "Su registro ha sido exitoso",
+          success(context, "Perfil Completado", "Su registro ha sido exitoso",
               f: () {
             Navigator.pushReplacementNamed(context, home);
           });
