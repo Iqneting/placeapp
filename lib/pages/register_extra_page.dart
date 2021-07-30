@@ -40,7 +40,6 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
 
   String emailArg = null;
   UserService userService = UserService();
-
   void handleRegister() async {
     try {
       setState(() {
@@ -69,19 +68,19 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           user.fechaVencimientoLicencia =
               _fechaVencimientoLicenciaController.text;
           user.fechaVencimientoPoliza = _fechaVencimientoPolizaController.text;
-          print(user);
           bandera = await userService.updateUser(user, user.id);
         }
 
         if (bandera) {
           success(context, "Perfil Completado", "Su registro ha sido exitoso",
               f: () {
-            preferences.telefonoPoliza = _telefonoSeguroController.text;
+            setState(() {
+              isSubmitting = false;
+            });
+            //preferences.telefonoPoliza = _telefonoSeguroController.text;
             Navigator.pushReplacementNamed(context, home);
           });
-          setState(() {
-            isSubmitting = false;
-          });
+          
         }
       }
     } catch (e) {

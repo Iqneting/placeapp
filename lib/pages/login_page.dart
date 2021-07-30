@@ -19,6 +19,7 @@ class LoginPage extends StatefulWidget {
   String email;
   String password;
   LoginPage({this.email = "", this.password = ""});
+  
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -32,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   UserPreferences preferences = new UserPreferences();
   bool isSubmitting = false;
   AppState _appState;
+  int _opcion = 0;
 
   @override
   void initState() {
@@ -54,10 +56,15 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> handleGoHome({UserCredential userCredential = null, User user = null}) async {
     UserService userService = new UserService();
-    
+    String email ='';
+    if (_opcion==1) {
+      email = _emailController.text;
+    } else {
+      email = user.email;
+    }
     if (user != null || userCredential != null) {
       preferences.email = _emailController.text;
-      preferences.tipoUsuario = await userService.checkTipousuario(_emailController.text);
+      preferences.tipoUsuario = await userService.checkTipousuario(email);
       _appState.isInvitado = false;
       
       Navigator.of(context).popAndPushNamed(home);
@@ -84,12 +91,14 @@ class _LoginPageState extends State<LoginPage> {
     UserCredential user =
         await signIn(_emailController.text, _passwordController.text, context);
     if (user != null) {
+      _opcion=1;
      await handleGoHome(userCredential: user);
     }
   }
 
   void handleLoginWithGoogle() async {
     User user = await GoogleSignInService.signInWithGoogle();
+    _opcion=2;
    await handleGoHome(user: user);
   }
 

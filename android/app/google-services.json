@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "358990322527-741n3sf23ln0mkjf5vglcst9ef011mcc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iqneting.places_app",
+            "certificate_hash": "4afb26c7c3bfa6e6573be3e11f60b1c88cee725b"
+          }
+        },
+        {
           "client_id": "358990322527-qa41p6t9kq5soridmvt8lo3v7g9982sr.apps.googleusercontent.com",
           "client_type": 3
         }

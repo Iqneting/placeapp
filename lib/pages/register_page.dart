@@ -92,10 +92,11 @@ class _RegisterPageState extends State<RegisterPage> {
             preferences.tipoUsuario = "normal";
             success(context, "Perfil Completado", "Su registro ha sido exitoso",
                 f: () {
-              Navigator.pushReplacementNamed(context, home);
+             //Navigator.pushReplacementNamed(context, home);
+              Navigator.pushReplacementNamed(context, registerExtra,
+                arguments: _emailController.text);
             });
-            /* Navigator.pushReplacementNamed(context, registerExtra,
-                arguments: _emailController.text);*/
+            
           }
           await user.user.updateProfile(displayName: _nameController.text);
           success(context, "Perfil Completado", "Su registro ha sido exitoso",
