@@ -15,7 +15,7 @@ class UserPreferences {
   }
 
   set email(String name) {
-    _prefs.setString('email', name);
+    //_prefs.setString('email', name);
   }
 
   get tipoUsuario {

@@ -278,7 +278,6 @@ class QueTePasoPage extends StatelessWidget {
   }
 
   Widget _buildTuveUnAccidente() {
-    print(preferences);
     return Container(
       width: double.infinity,
       height: 220,
@@ -346,15 +345,22 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Seguro 1",
+                    "Seguro ",
                     style: TextStyle(
                         color: kBaseTextTitle,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
-                  Expanded(
-                    child: Container(),
-                  )
+                  Text(
+                    preferences.numeroPoliza,
+                    style: TextStyle(
+                        color: kBaseTextTitle,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  // Expanded(
+                  //   child: Container(),
+                  // )
                 ],
               ),
               Row(
@@ -377,7 +383,7 @@ class QueTePasoPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () async {
-                        final String phone = "5552089898".split(" ").join("");
+                        final String phone = preferences.telefonoPoliza.split(" ").join("");
                         await launch("tel://$phone");
                       })
                 ],
