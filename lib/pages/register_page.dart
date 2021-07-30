@@ -100,7 +100,7 @@ class _RegisterPageState extends State<RegisterPage> {
           await user.user.updateProfile(displayName: _nameController.text);
           success(context, "Perfil Completado", "Su registro ha sido exitoso",
               f: () {
-            Navigator.pushReplacementNamed(context, home);
+            Navigator.pushReplacementNamed(context, registerExtra);
           });
           setState(() {
             isSubmitting = false;
