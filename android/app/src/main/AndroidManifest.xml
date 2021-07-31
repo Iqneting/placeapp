@@ -15,11 +15,11 @@
     <uses-feature android:name="android.hardware.location.gps" android:required="false"  />
 
 	<application android:name=".Application" android:label="Tu Taller Mecanico" android:icon="@mipmap/launcher_icon">
-
+		
 
 		<!-- <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyDRsPm_IEKxt5Hu9bPfa7FT4fn4vPh-jG0" /> -->
 
-		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyAooU8mIMwUlN7ff68cRS7ppxTuOUY1Vu4"/>
+		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCxyFsUuFODYNFkLSNabseR9_VAWX9u21Y"/>
 
 		<activity android:name=".MainActivity" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:hardwareAccelerated="true" android:windowSoftInputMode="adjustResize">
 			<!--

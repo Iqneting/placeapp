@@ -21,7 +21,6 @@ class GoogleSignInService {
       print(e);
       return null;
     } */
-
     try {
       final GoogleSignInAccount googleSignInAccount =
           await _googleSignIn.signIn();

@@ -32,6 +32,7 @@ showAlert(BuildContext context, String title, String subtitle) {
   if (Platform.isAndroid) {
     return showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (_) => AlertDialog(
         title: Text(title),
         content: Text(subtitle),
@@ -48,6 +49,7 @@ showAlert(BuildContext context, String title, String subtitle) {
 
   showCupertinoDialog(
       context: context,
+      barrierDismissible: false,
       builder: (_) => CupertinoAlertDialog(
             title: Text(title),
             content: Text(subtitle),

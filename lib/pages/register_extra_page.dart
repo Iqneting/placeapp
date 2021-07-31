@@ -8,12 +8,16 @@ import 'package:places_app/models/usuario_model.dart';
 import 'package:places_app/routes/routes.dart';
 import 'package:places_app/services/user_service.dart';
 import 'package:places_app/shared/user_preferences.dart';
+import 'package:places_app/storage/App.dart';
+import 'package:provider/provider.dart';
 
 import '../const/const.dart';
 
 class RegisterExtraPage extends StatefulWidget {
-  RegisterExtraPage({Key key}) : super(key: key);
+  //RegisterExtraPage({Key key}) : super(key: key);
+  final String emailArg;
 
+  const RegisterExtraPage(this.emailArg);
   @override
   _RegisterExtraPageState createState() => _RegisterExtraPageState();
 }
@@ -21,9 +25,9 @@ class RegisterExtraPage extends StatefulWidget {
 class _RegisterExtraPageState extends State<RegisterExtraPage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _licenciaController = TextEditingController();
-  TextEditingController _seguroController = TextEditingController();
-  TextEditingController _placaController = TextEditingController();
   TextEditingController _telefonoSeguroController = TextEditingController();
+  TextEditingController _numeroPolizaSeguroController = TextEditingController();
+  TextEditingController _placaController = TextEditingController();
 
   TextEditingController _fechaVencimientoLicenciaController =
       TextEditingController();
@@ -37,8 +41,9 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
   bool isAfiliado = false;
   UserPreferences preferences = new UserPreferences();
   bool isSubmitting = false;
+  AppState _appState;
 
-  String emailArg = null;
+  //String emailArg = null;
   UserService userService = UserService();
   void handleRegister() async {
     try {
@@ -53,34 +58,38 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
       } else {
         //TODO: continuar registro 2
         _formKey.currentState.save();
-
+        setState(() {
+          isSubmitting = false;
+        });
         Usuario user;
         bool bandera = false;
-
-        if (emailArg != null) {
-          user = await userService.getUsuario(emailArg);
+        if (widget.emailArg != null) {
+          user = await userService.getUsuario(widget.emailArg);
           user.licencia = _licenciaController.text;
-          user.seguro = _seguroController.text;
-
+          user.seguro = _numeroPolizaSeguroController.text;
           user.placa = _placaController.text;
           user.telefonoSeguro = _telefonoSeguroController.text;
           user.fechaPagoTenencia = _fechaPagoTenenciaController.text;
-          user.fechaVencimientoLicencia =
-              _fechaVencimientoLicenciaController.text;
+          user.fechaVencimientoLicencia = _fechaVencimientoLicenciaController.text;
           user.fechaVencimientoPoliza = _fechaVencimientoPolizaController.text;
           bandera = await userService.updateUser(user, user.id);
+          preferences.email = user.correo;
+          preferences.numeroPoliza = user.seguro;
+          preferences.telefonoPoliza = user.telefonoSeguro;
+          preferences.tipoUsuario = user.tipoUsuario;
+          preferences.telefonoPoliza = _telefonoSeguroController.text;
+          preferences.numeroPoliza = _numeroPolizaSeguroController.text;
         }
 
         if (bandera) {
+          _appState.isInvitado = false;
           success(context, "Perfil Completado", "Su registro ha sido exitoso",
               f: () {
             setState(() {
               isSubmitting = false;
             });
-            //preferences.telefonoPoliza = _telefonoSeguroController.text;
             Navigator.pushReplacementNamed(context, home);
           });
-          
         }
       }
     } catch (e) {
@@ -94,7 +103,8 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context);
-    emailArg = ModalRoute.of(context).settings.arguments;
+    _appState = Provider.of<AppState>(context);
+    //emailArg = ModalRoute.of(context).settings.arguments;
     DateTime _dateLicencia;
     DateTime _dateSeguro;
     DateTime _datePagoTendencia;
@@ -210,7 +220,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
         });
 
     final numeroPolizaSeguroField = TextFormField(
-        controller: _seguroController,
+        controller: _numeroPolizaSeguroController,
         keyboardType: TextInputType.datetime,
         enabled: true,
         style: TextStyle(color: Colors.black),
@@ -231,7 +241,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           return null;
         },
         onSaved: (String value) {
-          _seguroController.text = value;
+          _numeroPolizaSeguroController.text = value;
         });
 
     final vechaVencimientoPolizaField = TextFormField(
@@ -306,7 +316,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           return null;
         },
         onSaved: (String value) {
-          _seguroController.text = value;
+          _telefonoSeguroController.text = value;
         });
 
     final calendarLicencia = Row(

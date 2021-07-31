@@ -4,6 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:places_app/components/blur_container.dart';
+import 'package:places_app/models/usuario_model.dart';
+import 'package:places_app/pages/register_extra_page.dart';
+import 'package:places_app/providers/push_notification_provider.dart';
 
 import 'package:places_app/routes/routes.dart';
 import 'package:places_app/services/facebook_signin_service.dart';
@@ -19,7 +22,6 @@ class LoginPage extends StatefulWidget {
   String email;
   String password;
   LoginPage({this.email = "", this.password = ""});
-  
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -33,7 +35,8 @@ class _LoginPageState extends State<LoginPage> {
   UserPreferences preferences = new UserPreferences();
   bool isSubmitting = false;
   AppState _appState;
-  int _opcion = 0;
+  PushNotificationsPovider _pushNotificationProvider =
+      PushNotificationsPovider();
 
   @override
   void initState() {
@@ -54,23 +57,51 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<void> handleGoHome({UserCredential userCredential = null, User user = null}) async {
+  Future<void> handleGoHome(
+      {UserCredential userCredential = null, User user = null}) async {
     UserService userService = new UserService();
-    String email ='';
-    if (_opcion==1) {
-      email = _emailController.text;
-    } else {
-      email = user.email;
-    }
-    if (user != null || userCredential != null) {
+    if (userCredential != null && user == null) {
+      //Caso para correo y contrasenia
       preferences.email = _emailController.text;
-      preferences.tipoUsuario = await userService.checkTipousuario(email);
+      preferences.tipoUsuario =
+          await userService.checkTipousuario(_emailController.text);
+      setSubmitting(false);
       _appState.isInvitado = false;
-      
       Navigator.of(context).popAndPushNamed(home);
-      setSubmitting(false);
-    }else{
-      setSubmitting(false);
+    } else if (userCredential == null && user != null) {
+      //Caso para google
+      Usuario userExtraData = await userService.getUsuario(user.email);
+      //Si ya tiene informacion extra guardada en la nube
+      if (userExtraData != null) {
+        UserPreferences preferences = new UserPreferences();
+        preferences.email = userExtraData.correo;
+        preferences.numeroPoliza = userExtraData.seguro;
+        preferences.telefonoPoliza = userExtraData.telefonoSeguro;
+        preferences.tipoUsuario = userExtraData.tipoUsuario;
+        setSubmitting(false);
+        _appState.isInvitado = false;
+        Navigator.of(context).popAndPushNamed(home);
+      } else {
+        //si no Debera llenarla
+        final tokenPush = await _pushNotificationProvider.getToken();
+        userExtraData = new Usuario(
+            tipoUsuario: "normal",
+            apellidoMaterno: "",
+            apellidoPaterno: "",
+            correo: user.email,
+            licencia: "",
+            nombre: user.displayName,
+            placa: "",
+            telefonoSeguro: "",
+            seguro: "",
+            tokenPush: tokenPush);
+        await userExtraData.save(user.email);
+        setSubmitting(false);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => RegisterExtraPage(user.email)));
+      }
     }
   }
 
@@ -91,20 +122,18 @@ class _LoginPageState extends State<LoginPage> {
     UserCredential user =
         await signIn(_emailController.text, _passwordController.text, context);
     if (user != null) {
-      _opcion=1;
-     await handleGoHome(userCredential: user);
+      await handleGoHome(userCredential: user);
     }
   }
 
   void handleLoginWithGoogle() async {
     User user = await GoogleSignInService.signInWithGoogle();
-    _opcion=2;
-   await handleGoHome(user: user);
+    await handleGoHome(user: user);
   }
 
   void handleLoginWithFacebook() async {
     UserCredential user = await FacebookSignInService.signInWithFacebook();
-   await handleGoHome(userCredential: user);
+    await handleGoHome(userCredential: user);
   }
 
   @override
@@ -211,13 +240,6 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: handleLoginEmailPassword,
         ));
 
-    final facebookLoginButton = FloatingActionButton(
-      heroTag: "google",
-      backgroundColor: kBaseColor,
-      child: Icon(FontAwesomeIcons.facebook, color: Colors.white),
-      onPressed: handleLoginWithFacebook,
-    );
-
     final googleLoginButton = FloatingActionButton(
       heroTag: "fb",
       backgroundColor: kBaseColor,
@@ -279,7 +301,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[googleLoginButton, facebookLoginButton],
+          children: <Widget>[googleLoginButton],
         )
       ],
     );
