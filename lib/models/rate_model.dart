@@ -70,8 +70,25 @@ class Rating {
     api.addDocument(this.toJson());
   }
 
+  Future<bool> validateRating() async {
+    final resp = await api.getWhere('usuario_id',usuarioId );
+    List<Rating> lista = resp.docs.map((doc) => Rating.fromMap(doc.data(), doc.id)).toList();
+    print(lista);
+    for (var item in lista) {
+      if (item.nombreAfiliacion == nombreAfiliacion) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   static Future<List<Rating>> getByUser(String user) async {
     final resp = await api.getWhere('user_id', user);
+    return resp.docs.map((doc) => Rating.fromMap(doc.data(), doc.id)).toList();
+  }
+
+  Future<List<Rating>> getByCompany(String company) async {
+    final resp = await api.getWhere('nombre_afiliacion', company);
     return resp.docs.map((doc) => Rating.fromMap(doc.data(), doc.id)).toList();
   }
 }

@@ -12,9 +12,12 @@ class AfiliadosService {
     afiliadosDB.addDocument(afiliado.toJson());
   }
 
-  Future<List<Afiliado>> getByCategoria(String categoria) async {
-    await afiliadosDB.getDataCollection();
-    return [];
+  Future<List<Afiliado>> getByCategoria() async {
+    var result = await afiliadosDB.getDataCollection();
+    List<Afiliado> data = [];
+    data =
+        result.docs.map((doc) => Afiliado.fromMap(doc.data(), doc.id)).toList();
+    return data;
   }
 
   //

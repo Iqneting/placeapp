@@ -127,6 +127,10 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
       nombreUsuario: "",
       ubicacion: widget.afiliado.ubicacion ?? '',
     );
+    if(await rating.validateRating()){
+      return success(context,"Error" ,"Este negocio ya está calificado");
+    }
+
     rating.save();
     appState.updateRatings();
     appState.updateAfiliados();

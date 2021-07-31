@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:places_app/components/custom_header.dart';
 
 import 'package:places_app/models/rate_model.dart';
+import 'package:places_app/shared/user_preferences.dart';
 
 import 'package:places_app/storage/App.dart';
 import 'package:provider/provider.dart';
@@ -15,15 +16,24 @@ class HistorialPage extends StatefulWidget {
 
 class _HistorialPageState extends State<HistorialPage> {
   List<Rating> ratings = [];
+  Rating  rating = new Rating();
   Size _size;
   bool loading = false;
   AppState appState = new AppState();
+  UserPreferences preferences = new UserPreferences();
 
   @override
   void initState() {
     //init();
     super.initState();
+    //getRatings();
   }
+
+  // Future getRatings() async{
+  //   Rating  rating = new Rating();
+  //   ratings = await rating.getByCompany(preferences.nombreAfiliacion);
+
+  // }
 
   void init() async {}
 
@@ -42,22 +52,32 @@ class _HistorialPageState extends State<HistorialPage> {
     return Scaffold(
       body: loading
           ? Center(child: CircularProgressIndicator())
-          : SafeArea(
-              child: Column(
-                children: <Widget>[
-                  CustomHeader(title: "Historial de calificaciones"),
-                  Expanded(
-                      child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(height: 10.0),
-                        ...ratings.map((r) => _reviewContainer(r)).toList(),
-                      ],
-                    ),
-                  ))
-                ],
-              ),
-            ),
+          : FutureBuilder(
+            future: rating.getByCompany(preferences.nombreAfiliacion),
+            builder: (context, snapshot) {
+              if(snapshot.hasData){
+              return SafeArea(
+                  child: Column(
+                    children: <Widget>[
+                      CustomHeader(title: "Historial de calificaciones"),
+                      Expanded(
+                          child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            SizedBox(height: 10.0),
+                            ...snapshot.data.map((r) => _reviewContainer(r)).toList(),
+                          ],
+                        ),
+                      ))
+                    ],
+                  ),
+                );
+            
+              }else{
+                return CircularProgressIndicator();
+              }
+              }
+          ),
     );
   }
 
