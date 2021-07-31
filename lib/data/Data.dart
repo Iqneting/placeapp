@@ -34,6 +34,9 @@ class GlobalData {
     Categoria(id: "14", nombre: "Eléctrico", imagen: ELECTRICO),
     Categoria(id: "15", nombre: "Alineación y balanceo", imagen: ALINEACION),
     Categoria(id: "16", nombre: "Autolavado", imagen: AUTOLAVADO),
+    Categoria(id: "17", nombre: "Tapiceria", imagen: ""),
+    Categoria(id: "18", nombre: "Llantas", imagen: ""),
+    Categoria(id: "19", nombre: "Hojalateros", imagen: ""),
   ];
 
   static List<Afiliado> afiliados = [
@@ -53,28 +56,28 @@ class GlobalData {
       telefono: '+527225947467',
     ),
     Afiliado(
-        id: '1',
+        id: '3',
         nombre: "Dyna-Mate",
         ubicacion: 'Av Tecnológico 48, Llano Grande, 52149 Metepec, Méx.',
         img: DEFAULT_IMAGE,
         fotos: [IMG1, IMG2, IMG3],
         telefono: '+527225947467'),
     Afiliado(
-        id: '1',
+        id: '4',
         nombre: "Avante Llantas La Virgen",
         ubicacion: 'Santiaguito, 52140 Metepec, Méx.',
         img: DEFAULT_IMAGE,
         fotos: [IMG1, IMG2, IMG3],
         telefono: '+527225947467'),
     Afiliado(
-        id: '2',
+        id: '5',
         nombre: "Super llantas de Metepec",
         ubicacion: 'De Galeana 78, Santa Cruz, 52140 Metepec, Méx.',
         img: DEFAULT_IMAGE,
         fotos: [IMG1, IMG2, IMG3],
         telefono: '+527225947467'),
     Afiliado(
-        id: '1',
+        id: '6',
         nombre: "Dyna-Mate",
         ubicacion: 'Av Tecnológico 48, Llano Grande, 52149 Metepec, Méx.',
         img: DEFAULT_IMAGE,

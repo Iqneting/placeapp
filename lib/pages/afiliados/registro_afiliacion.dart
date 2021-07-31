@@ -139,35 +139,35 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
                   ),
                 ),
                 Container(
-
                   child: Stack(
                     children: [
                       TextFormField(
-                      readOnly: true,
-                      controller: ubicacionCtrl,
-                      decoration: InputDecoration(
-                        labelText: 'Ubicación',
+                        readOnly: true,
+                        controller: ubicacionCtrl,
+                        decoration: InputDecoration(
+                          labelText: 'Ubicación',
+                        ),
                       ),
-                    ),
-                    Container(
-                      color: Colors.transparent,
-                      width: double.infinity,
-                      //height: double.infinity,
-                      child: Column(children: [
-                        Row(
+                      Container(
+                        color: Colors.transparent,
+                        width: double.infinity,
+                        //height: double.infinity,
+                        child: Column(
                           children: [
-                            Expanded(child: Container()),
-                            IconButton(icon: Icon(Icons.map), onPressed: (){
-
-                              _buildDireccion();
-
-                            })
+                            Row(
+                              children: [
+                                Expanded(child: Container()),
+                                IconButton(
+                                    icon: Icon(Icons.map),
+                                    onPressed: () {
+                                      _buildDireccion();
+                                    })
+                              ],
+                            )
                           ],
-                        )
-                      ],),
-                    )
+                        ),
+                      )
                     ],
-                     
                   ),
                 ),
                 SmartSelect<String>.single(
@@ -316,7 +316,6 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
         user: preferences.email,
         ubicacion: ubicacionCtrl.text,
         aprobado: false,
-        
       );
       db.crearAfiliado(afiliado);
       alerts.success(context, "Registro exitoso",
@@ -385,75 +384,74 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
     );
   }
 
-  _buildDireccion(){
+  _buildDireccion() {
     return Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PlacePicker(
-                        apiKey:
-                            "AIzaSyAooU8mIMwUlN7ff68cRS7ppxTuOUY1Vu4", // Put YOUR OWN KEY here.
-                        onPlacePicked: (result) {
-                          print(result.geometry.location);
-                          Navigator.of(context).pop();
-                        },
-                        initialPosition: SearchAddressMap.kInitialPosition,
-                        enableMapTypeButton:false,
-                        automaticallyImplyAppBarLeading: true,
-                        useCurrentLocation: true,
-                        usePinPointingSearch: true,
-                        enableMyLocationButton:false,
-                        usePlaceDetailSearch: true,
-                        autocompleteLanguage: "es",
-                        selectedPlaceWidgetBuilder:
-                            (_, selectedPlace, state, isSearchBarFocused) {
-                          print(
-                              "state: $state, isSearchBarFocused: $isSearchBarFocused");
-                              String lat = "";
-                              String lng = "";
+      context,
+      MaterialPageRoute(
+        builder: (context) => PlacePicker(
+          apiKey:
+              "AIzaSyAooU8mIMwUlN7ff68cRS7ppxTuOUY1Vu4", // Put YOUR OWN KEY here.
+          onPlacePicked: (result) {
+            print(result.geometry.location);
+            Navigator.of(context).pop();
+          },
+          initialPosition: SearchAddressMap.kInitialPosition,
+          enableMapTypeButton: false,
+          automaticallyImplyAppBarLeading: true,
+          useCurrentLocation: true,
+          usePinPointingSearch: true,
+          enableMyLocationButton: false,
+          usePlaceDetailSearch: true,
+          autocompleteLanguage: "es",
+          selectedPlaceWidgetBuilder:
+              (_, selectedPlace, state, isSearchBarFocused) {
+            print("state: $state, isSearchBarFocused: $isSearchBarFocused");
+            String lat = "";
+            String lng = "";
 
-                              if(state != SearchingState.Searching){
-                              lat =selectedPlace.geometry.location.lat.toString() ;
-                              lng =selectedPlace.geometry.location.lng.toString();
-                              }
-                          return isSearchBarFocused
-                              ? Container()
-                              : FloatingCard(
-                                  bottomPosition:
-                                      0.0, // MediaQuery.of(context) will cause rebuild. See MediaQuery document for the information.
-                                  leftPosition: 0.0,
-                                  rightPosition: 0.0,
-                                  width: 500,
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: state == SearchingState.Searching
-                                      ? Center(
-                                          child: CircularProgressIndicator())
-                                      : Container(
-                                        child: Column(
-                                          children: [
-                                            Text(selectedPlace.name),
-                                            //Text("Lat: $lat Lnt: $lng"),
-                                           
-                                            RaisedButton(
-                                                child: Text("Guardar Direccion"),
-                                                onPressed: () {
+            if (state != SearchingState.Searching) {
+              lat = selectedPlace.geometry.location.lat.toString();
+              lng = selectedPlace.geometry.location.lng.toString();
+            }
+            return isSearchBarFocused
+                ? Container()
+                : FloatingCard(
+                    bottomPosition:
+                        0.0, // MediaQuery.of(context) will cause rebuild. See MediaQuery document for the information.
+                    leftPosition: 0.0,
+                    rightPosition: 0.0,
+                    width: 500,
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: state == SearchingState.Searching
+                        ? Center(child: CircularProgressIndicator())
+                        : Container(
+                            child: Column(
+                              children: [
+                                Text(selectedPlace.name),
+                                //Text("Lat: $lat Lnt: $lng"),
 
-                                                  latitud = selectedPlace.geometry.location.lat;
-                                                  longitud = selectedPlace.geometry.location.lng;
-                                                  ubicacionCtrl.text = selectedPlace.name;
-                                                  // IMPORTANT: You MUST manage selectedPlace data yourself as using this build will not invoke onPlacePicker as
-                                                  //            this will override default 'Select here' Button.
-                                                  print(
-                                                      "do something with [selectedPlace] data");
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                          ],
-                                        ),
-                                      ),
-                                );
-                        },
-                      ),
-                    ),
+                                RaisedButton(
+                                  child: Text("Guardar Direccion"),
+                                  onPressed: () {
+                                    latitud =
+                                        selectedPlace.geometry.location.lat;
+                                    longitud =
+                                        selectedPlace.geometry.location.lng;
+                                    ubicacionCtrl.text = selectedPlace.name;
+                                    // IMPORTANT: You MUST manage selectedPlace data yourself as using this build will not invoke onPlacePicker as
+                                    //            this will override default 'Select here' Button.
+                                    print(
+                                        "do something with [selectedPlace] data");
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
                   );
+          },
+        ),
+      ),
+    );
   }
 }

@@ -383,7 +383,8 @@ class QueTePasoPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () async {
-                        final String phone = preferences.telefonoPoliza.split(" ").join("");
+                        final String phone =
+                            preferences.telefonoPoliza.split(" ").join("");
                         await launch("tel://$phone");
                       })
                 ],
@@ -567,17 +568,18 @@ class QueTePasoPage extends StatelessWidget {
                 thickness: 3,
               ),
               SizedBox(
-                height: 5,
+                height: 8,
               ),
               Row(
                 children: [
                   Expanded(
                       child: Text(
                     "Busca tu boleta de la infracción en tu parabrisas. En  ella vendrá el monto de la multa y el teléfono para que retiren tu inmovilizador. Puedes pagar en tiendas 7Eleven.",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: kBaseTextTitle,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: kBaseTextTitle,
+                      fontSize: 20,
+                    ),
                   )),
                 ],
               ),
