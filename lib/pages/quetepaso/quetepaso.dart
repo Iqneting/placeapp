@@ -351,7 +351,7 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Seguro ",
+                    "Número de póliza ",
                     style: TextStyle(
                         color: kBaseTextTitle,
                         fontSize: 20,
@@ -372,7 +372,7 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Teléfono: ",
+                    "Número de Teléfono de emergencia de seguro: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
@@ -457,7 +457,7 @@ class QueTePasoPage extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 5,
+                height: 10,
               ),
               Divider(
                 height: 2,
@@ -465,7 +465,7 @@ class QueTePasoPage extends StatelessWidget {
                 thickness: 3,
               ),
               SizedBox(
-                height: 5,
+                height: 10,
               ),
               Row(
                 children: [
@@ -475,9 +475,9 @@ class QueTePasoPage extends StatelessWidget {
                     style: TextStyle(
                       color: kBaseTextTitle,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.normal,
                     ),
-                    textAlign: TextAlign.justify,
+                    textAlign: TextAlign.center,
                   )),
                 ],
               ),
