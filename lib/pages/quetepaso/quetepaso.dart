@@ -568,7 +568,7 @@ class QueTePasoPage extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: 5,
+                height: 10,
               ),
               Divider(
                 height: 2,
@@ -576,7 +576,7 @@ class QueTePasoPage extends StatelessWidget {
                 thickness: 3,
               ),
               SizedBox(
-                height: 12,
+                height: 4,
               ),
               Row(
                 children: [
