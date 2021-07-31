@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:places_app/components/blur_container.dart';
 import 'package:places_app/helpers/alerts_helper.dart';
 import 'package:places_app/models/usuario_model.dart';
+import 'package:places_app/pages/register_extra_page.dart';
 import 'package:places_app/providers/push_notification_provider.dart';
 
 import 'package:places_app/routes/routes.dart';
@@ -93,10 +94,8 @@ class _RegisterPageState extends State<RegisterPage> {
             success(context, "Perfil Completado", "Su registro ha sido exitoso",
                 f: () {
              //Navigator.pushReplacementNamed(context, home);
-              Navigator.pushReplacementNamed(context, registerExtra,
-                arguments: _emailController.text);
+              Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(_emailController.text)));
             });
-            
           }
           await user.user.updateProfile(displayName: _nameController.text);
           success(context, "Perfil Completado", "Su registro ha sido exitoso",

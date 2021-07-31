@@ -13,10 +13,8 @@ void main() async {
   UserPreferences userPrefrences = new UserPreferences();
 
   await userPrefrences.initPrefs();
-  String initialRoute =
-      !userPrefrences.isFirstLoad ? routes.tutorial : routes.home;
-
-  initialRoute = routes.tutorial;
+  //String initialRoute = '/';
+  String initialRoute = userPrefrences.isFirstLoad==true ? routes.tutorial:routes.home;
   runApp(MyApp(initialRoute));
 }
 

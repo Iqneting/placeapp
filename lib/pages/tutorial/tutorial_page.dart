@@ -13,7 +13,6 @@ class _TutorialPageState extends State<TutorialPage> {
 List<Tutorial> tutorial = [];
  bool isLoading = true;
 
-
   @override
   void initState() {
     super.initState();

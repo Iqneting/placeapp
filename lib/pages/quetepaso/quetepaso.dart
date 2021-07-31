@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:places_app/const/const.dart';
 import 'package:places_app/pages/quetepaso/slide_show.dart';
+import 'package:places_app/routes/routes.dart';
 import 'package:places_app/shared/user_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -36,17 +37,22 @@ class QueTePasoPage extends StatelessWidget {
   }
 
   Widget _cancelButton(BuildContext context) {
-    return Container(
-        child: IconButton(
-      icon: Icon(
-        Icons.cancel,
-        color: kBaseColor,
-        size: 40.0,
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          icon: Icon(
+            Icons.cancel,
+            color: kBaseColor,
+            //size: 40.0,
+          ),
+          iconSize: 60,
       onPressed: () {
-        Navigator.pop(context);
+        Navigator.popUntil(context, ModalRoute.withName(home));
       },
-    ));
+    )
+      ],
+    );
   }
 
   Widget _title() {
@@ -248,12 +254,12 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Telefono: ",
+                    "Teléfono: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "5552089898",
+                    "5556581111",
                     style: TextStyle(color: Colors.white),
                   ),
                   Expanded(
@@ -265,7 +271,7 @@ class QueTePasoPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () async {
-                        final String phone = "5552089898".split(" ").join("");
+                        final String phone = "5556581111".split(" ").join("");
                         await launch("tel://$phone");
                       })
                 ],
@@ -366,7 +372,7 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Telefono: ",
+                    "Teléfono: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
@@ -464,18 +470,20 @@ class QueTePasoPage extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Text(
-                    "Verifica si se llevaron al corralón a tu auto llamando al siguiente numero:",
+                    "Verifica si se llevaron al corralón a tu auto llamando al siguiente número:",
                     style: TextStyle(
                         color: kBaseTextTitle,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    textAlign: TextAlign.justify,
                   )),
                 ],
               ),
               Row(
                 children: [
                   Text(
-                    "Telefono: ",
+                    "Teléfono: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
@@ -507,7 +515,7 @@ class QueTePasoPage extends StatelessWidget {
   Widget _buildMePusieronLaArana() {
     return Container(
       width: double.infinity,
-      height: 200,
+      height: 210,
       decoration: BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.only(
@@ -573,11 +581,12 @@ class QueTePasoPage extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Text(
-                    "Busca tu boleta de la infracción en tu parabrisas. En  ella vendrá el monto de la multa y el teléfono para que retiren tu inmovilizador. Puedes pagar en tiendas 7Eleven.",
+                    "Busca tu boleta de la infracción en tu parabrisas. En ella vendrá el monto de la multa y el teléfono para que retiren tu inmovilizador. Puedes pagar en tiendas 7Eleven.",
                     style: TextStyle(
                         color: kBaseTextTitle,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.justify,
                   )),
                 ],
               ),

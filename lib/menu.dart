@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:places_app/pages/register_extra_page.dart';
 import 'package:places_app/routes/routes.dart';
 import 'package:places_app/services/user_service.dart';
 import 'package:places_app/shared/user_preferences.dart';
@@ -18,7 +19,7 @@ class _MenuBarState extends State<MenuBar> {
   UserPreferences preferences = new UserPreferences();
   UserService userService = UserService();
   AppState appState;
-   Usuario usuario;
+  Usuario usuario;
 
   @override
   Widget build(BuildContext context) {
@@ -80,8 +81,8 @@ class _MenuBarState extends State<MenuBar> {
                       leading: const Icon(Icons.settings, size: 20),
                       title: Text("Completar Registro"),
                       onTap: () {
-                        Navigator.pushReplacementNamed(context, registerExtra,
-                       arguments: preferences.email);
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(preferences.email)));
+                        //Navigator.pushReplacementNamed(context, registerExtra,arguments: preferences.email);
                       }
                     );
                         }else{
@@ -138,9 +139,7 @@ class _MenuBarState extends State<MenuBar> {
   }
 
   void handleLogOut() {
-    preferences.email = "";
-    preferences.tipoUsuario = "invitado";
-    preferences.nombreAfiliacion = "";
+    preferences.clearPreference();
     appState.isInvitado = true;
     Navigator.pushReplacementNamed(context, login);
   }
@@ -162,6 +161,7 @@ class _MenuBarState extends State<MenuBar> {
    
    usuario = new Usuario();
    usuario = await userService.getUsuario(preferences.email);
+   if(usuario==null){return true;} //Si se borra el registro desde Firebase
     if(usuario.licencia.length==0||usuario.fechaPagoTenencia.length==0){
        return true;
     }else{

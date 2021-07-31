@@ -112,9 +112,8 @@ class _SwiperTutorialState extends State<SwiperTutorial> {
                                 label: "Comenzar",
                                 //textColor: Colors.black,
                                 onPressed: () {
-                                  Navigator.of(context)
-                                      .popAndPushNamed(HomePage.routeName);
-                                  userPrefrences.setIsFirstLoad = true;
+                                  userPrefrences.setIsFirstLoad = false;
+                                  Navigator.of(context).popAndPushNamed(HomePage.routeName);
                                 })
                             : ChilangosButton(
                                 label: "Siguiente",

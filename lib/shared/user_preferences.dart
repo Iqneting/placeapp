@@ -15,7 +15,7 @@ class UserPreferences {
   }
 
   set email(String name) {
-    //_prefs.setString('email', name);
+    _prefs.setString('email', name);
   }
 
   get tipoUsuario {
@@ -71,7 +71,7 @@ class UserPreferences {
   }
 
   get isFirstLoad {
-    return _prefs.getBool("isFirstLoad") ?? false;
+    return _prefs.getBool("isFirstLoad")??true;
   }
 
   set setIsFirstLoad(bool firstLoad) {
@@ -80,5 +80,13 @@ class UserPreferences {
 
   factory UserPreferences() {
     return _instance;
+  }
+
+  void clearPreference(){
+    email = "";
+    tipoUsuario = "invitado";
+    nombreAfiliacion = "";
+    telefonoPoliza="0";
+    numeroPoliza="0";
   }
 }
