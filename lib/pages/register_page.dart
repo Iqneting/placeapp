@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:places_app/components/blur_container.dart';
 import 'package:places_app/helpers/alerts_helper.dart';
 import 'package:places_app/models/usuario_model.dart';
+import 'package:places_app/pages/afiliados/registro_afiliacion.dart';
 import 'package:places_app/pages/register_extra_page.dart';
 import 'package:places_app/providers/push_notification_provider.dart';
 
@@ -76,6 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
             await usuario.save(_emailController.text);
             preferences.email = _emailController.text.toLowerCase();
             preferences.tipoUsuario = "afiliado";
+            Navigator.push(context,MaterialPageRoute(builder: (context) => RegistroAfiliacion()));
           } else {
             Usuario usuario = new Usuario(
                 tipoUsuario: "normal",
@@ -97,14 +99,8 @@ class _RegisterPageState extends State<RegisterPage> {
               Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(_emailController.text)));
             });
           }
-          await user.user.updateProfile(displayName: _nameController.text);
-          success(context, "Perfil Completado", "Su registro ha sido exitoso",
-              f: () {
-            Navigator.pushReplacementNamed(context, home);
-          });
-          setState(() {
-            isSubmitting = false;
-          });
+          //await user.user.updateProfile(displayName: _nameController.text);
+          
         }
       }
     } catch (e) {

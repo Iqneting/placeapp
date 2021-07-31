@@ -34,6 +34,9 @@ class GlobalData {
     Categoria(id: "14", nombre: "Eléctrico", imagen: ELECTRICO),
     Categoria(id: "15", nombre: "Alineación y balanceo", imagen: ALINEACION),
     Categoria(id: "16", nombre: "Autolavado", imagen: AUTOLAVADO),
+    Categoria(id: "17", nombre: "Tapiceria", imagen: ""),
+    Categoria(id: "18", nombre: "Llantas", imagen: ""),
+    Categoria(id: "19", nombre: "Hojalateros", imagen: ""),
   ];
 
   static List<Afiliado> afiliados = [

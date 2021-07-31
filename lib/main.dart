@@ -7,6 +7,7 @@ import 'package:places_app/shared/user_preferences.dart';
 import 'package:places_app/storage/App.dart';
 import 'package:provider/provider.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
