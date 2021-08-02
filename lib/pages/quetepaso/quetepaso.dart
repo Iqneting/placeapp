@@ -240,7 +240,7 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Locatel",
+                    "¿Te están extorsionando?",
                     style: TextStyle(
                         color: kBaseTextTitle,
                         fontSize: 20,
@@ -254,12 +254,12 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Teléfono: ",
+                    "Llama al: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "5556581111",
+                    "55 5208 9898",
                     style: TextStyle(color: Colors.white),
                   ),
                   Expanded(
@@ -271,7 +271,7 @@ class QueTePasoPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () async {
-                        final String phone = "5556581111".split(" ").join("");
+                        final String phone = "55 5208 9898".split(" ").join("");
                         await launch("tel://$phone");
                       })
                 ],
@@ -372,7 +372,7 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Número de Teléfono de emergencia de seguro: ",
+                    "Número de emergencia de seguro: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
@@ -414,7 +414,7 @@ class QueTePasoPage extends StatelessWidget {
             BoxShadow(
               color: Colors.grey,
               spreadRadius: 3,
-              blurRadius: 3,
+              blurRadius: 4,
               offset: Offset(0, 1), // changes position of shadow
             ),
           ]),

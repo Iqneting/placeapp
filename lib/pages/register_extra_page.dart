@@ -70,7 +70,8 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           user.placa = _placaController.text;
           user.telefonoSeguro = _telefonoSeguroController.text;
           user.fechaPagoTenencia = _fechaPagoTenenciaController.text;
-          user.fechaVencimientoLicencia = _fechaVencimientoLicenciaController.text;
+          user.fechaVencimientoLicencia =
+              _fechaVencimientoLicenciaController.text;
           user.fechaVencimientoPoliza = _fechaVencimientoPolizaController.text;
           bandera = await userService.updateUser(user, user.id);
           preferences.email = user.correo;
@@ -306,7 +307,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
               color: Colors.red,
             )),
             hintText: "Telefono",
-            labelText: "Telefono Seguro",
+            labelText: "Telefono de emergencia del Seguro",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
           if (value.isEmpty) {
