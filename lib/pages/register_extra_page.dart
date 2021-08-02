@@ -300,8 +300,13 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                 borderSide: BorderSide(
               color: Colors.red,
             )),
+<<<<<<< HEAD
             hintText: "Teléfono",
             labelText: "Teléfono para emergencia de tu seguro",
+=======
+            hintText: "Telefono",
+            labelText: "Telefono de emergencia del Seguro",
+>>>>>>> 7dee3d03e716c05b002b9499e53e9b612547ae8a
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
           if (value.isEmpty) {
