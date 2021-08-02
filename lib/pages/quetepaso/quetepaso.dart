@@ -254,33 +254,12 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-<<<<<<< HEAD
-=======
-                    "¿Te están extorsionando?",
-                    style: TextStyle(
-                        color: kBaseTextTitle,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Expanded(
-                    child: Container(),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
->>>>>>> 7dee3d03e716c05b002b9499e53e9b612547ae8a
                     "Llama al: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   Text(
-<<<<<<< HEAD
                     "5552089898",
-=======
-                    "55 5208 9898",
->>>>>>> 7dee3d03e716c05b002b9499e53e9b612547ae8a
                     style: TextStyle(color: Colors.white),
                   ),
                   Expanded(
@@ -292,11 +271,7 @@ class QueTePasoPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () async {
-<<<<<<< HEAD
                         final String phone = "5552089898".split(" ").join("");
-=======
-                        final String phone = "55 5208 9898".split(" ").join("");
->>>>>>> 7dee3d03e716c05b002b9499e53e9b612547ae8a
                         await launch("tel://$phone");
                       })
                 ],
@@ -397,11 +372,7 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-<<<<<<< HEAD
                     "Teléfono de emergencia de seguro: ",
-=======
-                    "Número de emergencia de seguro: ",
->>>>>>> 7dee3d03e716c05b002b9499e53e9b612547ae8a
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                         overflow: TextOverflow.ellipsis,
