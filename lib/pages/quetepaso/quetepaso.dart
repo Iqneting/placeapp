@@ -78,7 +78,7 @@ class QueTePasoPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _itemMenu(
-                  "Me paró una patrulla",
+                  "¿Extorción?",
                   Icons.policy,
                   context,
                   TipoQueTePaso.MeParoUnaPatrulla,
@@ -175,7 +175,7 @@ class QueTePasoPage extends StatelessWidget {
   Widget _buildMeParoUnaPatrulla() {
     return Container(
       width: double.infinity,
-      height: 200,
+      height: 240,
       decoration: BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.only(
@@ -215,7 +215,7 @@ class QueTePasoPage extends StatelessWidget {
                     child: Container(),
                   ),
                   Text(
-                    "Me paró una patrulla",
+                    "¿Te están extorsionando?",
                     style: TextStyle(
                         color: kBaseTextTitle,
                         fontSize: 20,
@@ -237,29 +237,29 @@ class QueTePasoPage extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
+              // Row(
+              //   children: [
+              //     Text(
+              //       "Locatel",
+              //       style: TextStyle(
+              //           color: kBaseTextTitle,
+              //           fontSize: 20,
+              //           fontWeight: FontWeight.bold),
+              //     ),
+              //     Expanded(
+              //       child: Container(),
+              //     )
+              //   ],
+              // ),
               Row(
                 children: [
                   Text(
-                    "Locatel",
-                    style: TextStyle(
-                        color: kBaseTextTitle,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Expanded(
-                    child: Container(),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    "Teléfono: ",
+                    "Llama al: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "5556581111",
+                    "5552089898",
                     style: TextStyle(color: Colors.white),
                   ),
                   Expanded(
@@ -271,7 +271,7 @@ class QueTePasoPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () async {
-                        final String phone = "5556581111".split(" ").join("");
+                        final String phone = "5552089898".split(" ").join("");
                         await launch("tel://$phone");
                       })
                 ],
@@ -286,7 +286,7 @@ class QueTePasoPage extends StatelessWidget {
   Widget _buildTuveUnAccidente() {
     return Container(
       width: double.infinity,
-      height: 220,
+      height: 240,
       decoration: BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.only(
@@ -372,9 +372,10 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Número de Teléfono de emergencia de seguro: ",
+                    "Teléfono de emergencia de seguro: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     preferences.telefonoPoliza,
@@ -405,7 +406,7 @@ class QueTePasoPage extends StatelessWidget {
   Widget _buildMiCarroNoEsta() {
     return Container(
       width: double.infinity,
-      height: 200,
+      height: 240,
       decoration: BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.only(
@@ -484,12 +485,12 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    "Teléfono: ",
+                    "Locatel: ",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    "5552089898",
+                    "5556581111",
                     style: TextStyle(color: Colors.white),
                   ),
                   Expanded(
@@ -501,7 +502,7 @@ class QueTePasoPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                       onPressed: () async {
-                        final String phone = "5552089898".split(" ").join("");
+                        final String phone = "5556581111".split(" ").join("");
                         await launch("tel://$phone");
                       })
                 ],
@@ -516,7 +517,7 @@ class QueTePasoPage extends StatelessWidget {
   Widget _buildMePusieronLaArana() {
     return Container(
       width: double.infinity,
-      height: 210,
+      height: 240,
       decoration: BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.only(

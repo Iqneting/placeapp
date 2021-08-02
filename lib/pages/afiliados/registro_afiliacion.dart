@@ -13,6 +13,7 @@ import 'package:places_app/data/Data.dart';
 import 'package:places_app/helpers/alerts_helper.dart' as alerts;
 import 'package:places_app/helpers/fotos_helper.dart';
 import 'package:places_app/models/afiliado_model.dart';
+import 'package:places_app/models/categoria_model.dart';
 import 'package:places_app/pages/afiliados/seleccion_localizacion.dart';
 import 'package:places_app/routes/routes.dart';
 
@@ -43,38 +44,50 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
   List<PickedFile> fotos = [];
   double latitud = 0.0;
   double longitud = 0.0;
-
+  List<Categoria> categorias = [];
   UserPreferences preferences = new UserPreferences();
 
   String categoriaValue = '';
   List<S2Choice<String>> options = [
-    ...GlobalData.categorias
-        .map((e) => S2Choice(value: e.nombre, title: e.nombre))
-        .toList()
+    // ...GlobalData.categorias
+    //     .map((e) => S2Choice(value: e.nombre, title: e.nombre))
+    //     .toList()
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    this.initData();
+  }
+
+  void initData() async {
+    this.categorias = await Categoria.fetchData();
+    options = this.categorias.map((e) => S2Choice(value: e.nombre, title: e.nombre)).toList();
+    print(categorias);
+    setState(() {
+      isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     _size = MediaQuery.of(context).size;
-    return Scaffold(
-      /*  appBar: customAppBar(
-        context,
-        'Registro de afiliado',
-        center: true,
-        elevation: 0,
-      ), */
-      body: BlurContainer(
-        isLoading: isSaving,
-        text: "Registrando afiliación, espere un momento",
-        children: [
-          _formContainer(),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        heroTag: "register",
-        backgroundColor: kBaseColor,
-        onPressed: handleRegister,
-        label: Text("Terminar registro"),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        body: BlurContainer(
+          isLoading: isSaving,
+          text: "Registrando afiliación, espere un momento",
+          children: [
+            _formContainer(),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+          heroTag: "register",
+          backgroundColor: kBaseColor,
+          onPressed: handleRegister,
+          label: Text("Terminar registro"),
+        ),
       ),
     );
   }
@@ -93,7 +106,7 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
             ),
           ),
           padding: EdgeInsets.all(20.0),
-          width: _size.width * 0.8,
+          width: _size.width * 0.9,
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -109,7 +122,7 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
                     ),
                     SizedBox(height: 10.0),
                     Text(
-                      "Registro de afiliacion",
+                      "Registro de afiliación",
                       style: TextStyle(
                         color: Colors.black87,
                         fontSize: 20.0,
@@ -177,19 +190,6 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
                 SizedBox(
                   height: 20.0,
                 ),
-                Container(
-                  child: FlatButton(
-                    minWidth: _size.width * 0.4,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    onPressed: handleLogOut,
-                    child: Text(
-                      "Cancelar",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ),
-                )
               ],
             ),
           ),

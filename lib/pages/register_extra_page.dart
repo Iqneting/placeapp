@@ -88,7 +88,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             setState(() {
               isSubmitting = false;
             });
-            Navigator.pushReplacementNamed(context, home);
+            Navigator.of(context).pushNamedAndRemoveUntil(home, (Route<dynamic> route) => false);
           });
         }
       }
@@ -126,17 +126,13 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                 borderSide: BorderSide(
               color: Colors.red,
             )),
-            hintText: "Ingrese tu placa",
+            hintText: "Placa",
             labelText: "Placa",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
           if (value.isEmpty) {
             return 'Ingrese su placa';
           }
-
-          /* if (value.trim().length < 9 || value.trim().length > 9) {
-            return 'Su placa debe contener 9 caracteres';
-          }*/
 
           return null;
         },
@@ -155,12 +151,12 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                 borderSide: BorderSide(
               color: Colors.red,
             )),
-            hintText: "Introduce  numero tu licencia",
-            labelText: "Numero Licencia",
+            hintText: "Número",
+            labelText: "Número licencia",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
           if (value.isEmpty) {
-            return 'Ingrese la vigencia de su licencia';
+            return 'Número es requerido';
           }
 
           return null;
@@ -181,13 +177,12 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
               color: Colors.red,
             )),
             hintText: "Introduce la vigencia de tu licencia",
-            labelText: "Fecha Licencia vencimiento",
+            labelText: "Fecha vencimiento licencia",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
           if (value.isEmpty) {
             return 'Ingrese la vigencia de su licencia';
           }
-
           return null;
         },
         onSaved: (String value) {
@@ -230,12 +225,12 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                 borderSide: BorderSide(
               color: Colors.red,
             )),
-            hintText: "Ingrese numero de su póliza de seguro",
-            labelText: "Numero Póliza de seguro",
+            hintText: "Número",
+            labelText: "Número póliza de seguro",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
           if (value.isEmpty) {
-            return 'Ingrese la vigencia de su póliza de seguro';
+            return 'Número es requerido';
           }
 
           return null;
@@ -256,7 +251,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
               color: Colors.red,
             )),
             hintText: "Ingrese la vigencia de su póliza de seguro",
-            labelText: "Fecha Póliza de seguro",
+            labelText: "Fecha vencimiento póliza de seguro",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
           if (value.isEmpty) {
@@ -305,12 +300,12 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                 borderSide: BorderSide(
               color: Colors.red,
             )),
-            hintText: "Telefono",
-            labelText: "Telefono Seguro",
+            hintText: "Teléfono",
+            labelText: "Teléfono para emergencia de tu seguro",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
           if (value.isEmpty) {
-            return 'Numero de telefono es requerido';
+            return 'Teléfono es requerido';
           }
 
           return null;
@@ -334,10 +329,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                   _dateLicencia == null ? DateTime.now() : _dateLicencia,
               firstDate: _dateLicencia == null ? DateTime.now() : _dateLicencia,
               lastDate: DateTime(2050),
-              fieldLabelText: 'Fecha de vencimiento de su seguro',
-              fieldHintText: 'Fecha de vencimiento de su seguro',
               cancelText: 'Cancelar',
-              helpText: 'Fecha de vencimiento de su seguro',
             ).then((date) {
               setState(() {
                 _dateLicencia = date;
@@ -366,8 +358,6 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                     firstDate:
                         _dateSeguro == null ? DateTime.now() : _dateSeguro,
                     lastDate: DateTime(2050),
-                    fieldLabelText: 'Fecha de vencimiento de su seguro',
-                    fieldHintText: 'Fecha de vencimiento de su seguro',
                     cancelText: 'Cancelar')
                 .then((date) {
               setState(() {
@@ -400,10 +390,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                   ? DateTime.now()
                   : _dateVencimientoVerificacion,
               lastDate: DateTime(2050),
-              fieldLabelText: 'Fecha de vencimiento de su seguro',
-              fieldHintText: 'Fecha de vencimiento de su seguro',
               cancelText: 'Cancelar',
-              helpText: 'Fecha de vencimiento de su seguro',
             ).then((date) {
               setState(() {
                 _dateVencimientoVerificacion = date;
@@ -419,7 +406,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         RaisedButton(
-          child: Text('Seleccione la fecha de vencimiento',
+          child: Text('Seleccione la fecha de pago',
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white)),
           color: kBaseColor,
@@ -433,10 +420,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                   ? DateTime.now()
                   : _datePagoTendencia,
               lastDate: DateTime(2050),
-              fieldLabelText: 'Fecha de vencimiento de su seguro',
-              fieldHintText: 'Fecha de vencimiento de su seguro',
               cancelText: 'Cancelar',
-              helpText: 'Fecha de vencimiento de su seguro',
             ).then((date) {
               setState(() {
                 _datePagoTendencia = date;
@@ -497,58 +481,61 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
       ],
     );
 
-    return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: BlurContainer(
-          isLoading: isSubmitting,
-          text: "Registrando usuario",
-          children: [
-            SingleChildScrollView(
-              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
-              child: Container(
-                //height: mq.size.height,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    logo,
-                    !isAfiliado
-                        ? Text(
-                            "Registro de usuario",
-                            style: TextStyle(
-                              color: Colors.black87,
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w500,
+    return WillPopScope(
+      onWillPop: () async => false,
+        child: Scaffold(
+        body: Form(
+          key: _formKey,
+          child: BlurContainer(
+            isLoading: isSubmitting,
+            text: "Registrando usuario",
+            children: [
+              SingleChildScrollView(
+                padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
+                child: Container(
+                  //height: mq.size.height,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      logo,
+                      !isAfiliado
+                          ? Text(
+                              "Registro de Usuario",
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            )
+                          : Column(
+                              children: [
+                                Text(
+                                  "Paso 1",
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                SizedBox(height: 10.0),
+                                Text(
+                                  "Registro de usuario afiliado",
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
                             ),
-                          )
-                        : Column(
-                            children: [
-                              Text(
-                                "Paso 1",
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              SizedBox(height: 10.0),
-                              Text(
-                                "Registro de usuario afiliado",
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ],
-                          ),
-                    fields,
-                    bottom,
-                  ],
+                      fields,
+                      bottom,
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

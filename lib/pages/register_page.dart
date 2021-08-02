@@ -7,8 +7,6 @@ import 'package:places_app/models/usuario_model.dart';
 import 'package:places_app/pages/afiliados/registro_afiliacion.dart';
 import 'package:places_app/pages/register_extra_page.dart';
 import 'package:places_app/providers/push_notification_provider.dart';
-
-import 'package:places_app/routes/routes.dart';
 import 'package:places_app/shared/user_preferences.dart';
 
 import '../const/const.dart';
@@ -93,13 +91,11 @@ class _RegisterPageState extends State<RegisterPage> {
             await usuario.save(_emailController.text);
             preferences.email = _emailController.text.toLowerCase();
             preferences.tipoUsuario = "normal";
-            success(context, "Perfil Completado", "Su registro ha sido exitoso",
+            success(context, "Registro de Usuario", "Su registro ha sido exitoso",
                 f: () {
-             //Navigator.pushReplacementNamed(context, home);
               Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(_emailController.text)));
             });
           }
-          //await user.user.updateProfile(displayName: _nameController.text);
           
         }
       }
@@ -108,12 +104,6 @@ class _RegisterPageState extends State<RegisterPage> {
         isSubmitting = false;
       });
       print('error $e');
-      /*  _emailController.clear();
-      _nameController.clear();
-      _apellidoMaternoController.clear();
-      _apellidoPaternoController.clear();
-      _passwordController.clear();
-      _rePasswordController.clear(); */
     }
   }
 
@@ -358,7 +348,7 @@ class _RegisterPageState extends State<RegisterPage> {
             MaterialButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil('login', (route) => false);
+                    .popUntil(ModalRoute.withName("login"));
               },
               child: Text(
                 "Iniciar Sesión",
@@ -397,7 +387,6 @@ class _RegisterPageState extends State<RegisterPage> {
             SingleChildScrollView(
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
               child: Container(
-                height: mq.size.height,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

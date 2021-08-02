@@ -135,7 +135,7 @@ class _MenuBarState extends State<MenuBar> {
   }
 
   void handleLogin() {
-    Navigator.pushReplacementNamed(context, login);
+    Navigator.pushNamed(context, login);
   }
 
   void handleLogOut() {

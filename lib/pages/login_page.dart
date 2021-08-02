@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +43,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     if (widget.email.isNotEmpty && widget.password.isNotEmpty) {
-      //Call login
       doLogin();
     }
     super.initState();
@@ -273,7 +274,7 @@ class _LoginPageState extends State<LoginPage> {
             MaterialButton(
               onPressed: () {
                 Navigator.of(context)
-                    .pushNamedAndRemoveUntil('register', (route) => false);
+                    .pushNamed('register');
               },
               child: Text(
                 "Registrarse",
@@ -300,8 +301,15 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[googleLoginButton],
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            googleLoginButton,
+            SizedBox(width: 10,),
+            Text('Continuar con Google',style: Theme.of(context)
+                  .textTheme
+                  .subtitle1
+                  .copyWith(color: Colors.black),)
+          ],
         )
       ],
     );
@@ -316,7 +324,6 @@ class _LoginPageState extends State<LoginPage> {
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
               child: Container(
-                height: mq.size.height,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -395,7 +402,7 @@ class _LoginPageState extends State<LoginPage> {
     switch (error) {
       case '[firebase_auth/user-not-found] There is no user record corresponding to this identifier. The user may have been deleted.':
         messageError =
-            'Su correo electrónico no esta vinculado a ninguna cuenta registrada.';
+            'Su correo electrónico no está vinculado a ninguna cuenta registrada.';
         break;
       default:
         messageError = 'Verifique su correo y contraseña';

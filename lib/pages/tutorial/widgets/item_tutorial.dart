@@ -40,16 +40,16 @@ class _ItemTutorialState extends State<ItemTutorial> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 25, left: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                padding: const EdgeInsets.only(top: 15, left: 15),
+                child: ListView(
+                   physics: BouncingScrollPhysics(),
                   
                   children: [
                     //Expanded(child: Container()),
                     const SizedBox(height: 10.0),
                     _buildLogo(),
                     const SizedBox(height: 10.0),
-                    Text(this.widget.title.toUpperCase(),style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
+                    Text(this.widget.title.toUpperCase(),style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),textAlign: TextAlign.center,),
                     const SizedBox(height: 5.0),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

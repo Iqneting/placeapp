@@ -111,6 +111,8 @@ class _NoticiasSliderState extends State<NoticiasSlider> {
               width: double.infinity,
               child: Text(
                 n.titulo,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 20.0,
                 ),
@@ -121,6 +123,8 @@ class _NoticiasSliderState extends State<NoticiasSlider> {
               width: double.infinity,
               child: Text(
                 n.contenido,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                   fontSize: 12.0,
                 ),

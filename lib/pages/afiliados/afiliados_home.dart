@@ -39,9 +39,9 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
     if (hasAfiliacion) {
       isAprobado = preferences.afiliacionAprobada;
     }
-    afiliado = await afiliadoService.getByUser(preferences.email);
+    //afiliado = await afiliadoService.getByUser(preferences.email);
 
-    setState(() {});
+    //setState(() {});
 
     print("home_afiliado");
   }
@@ -49,10 +49,20 @@ class _AfiliadosHomeState extends State<AfiliadosHome> {
   @override
   Widget build(BuildContext context) {
     _size = MediaQuery.of(context).size;
-    return Scaffold(
-      key: scaffoldKey,
-      drawer: MenuBar(),
-      body: _stack(),
+    return FutureBuilder(
+      future: afiliadoService.getByUser(preferences.email),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        afiliado = snapshot.data;
+        if(snapshot.hasData){
+          return Scaffold(
+            key: scaffoldKey,
+            drawer: MenuBar(),
+            body: _stack(),
+          );
+        }else{
+          return CircularProgressIndicator();
+        }
+      },
     );
   }
 

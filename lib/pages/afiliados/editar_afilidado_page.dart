@@ -181,7 +181,6 @@ class _EditarAfiliadoPageState extends State<EditarAfiliadoPage> {
           aprobado: widget.afiliado.aprobado,
           rating: widget.afiliado.rating,
           puntos: widget.afiliado.puntos);
-      //db.crearAfiliado(afiliado);
       await afiliadosService.updateDocument(afiliado);
       alerts.success(context, "Actualizacion exitosa",
           "Sus datos fueron actualizados con exito.", f: () {
@@ -213,6 +212,9 @@ class _EditarAfiliadoPageState extends State<EditarAfiliadoPage> {
           onPlacePicked: (result) {
             print(result.formattedAddress);
             ubicacionCtrl.text = result.formattedAddress;
+            latitud = result.geometry.location.lat;
+            longitud = result.geometry.location.lng;
+
             Navigator.of(context).pop();
           },
           initialPosition: LatLng(19.3764253, -99.0573512),
@@ -220,74 +222,5 @@ class _EditarAfiliadoPageState extends State<EditarAfiliadoPage> {
         ),
       ),
     );
-
-    // return Navigator.push(
-    // context,
-    // MaterialPageRoute(
-    //      builder: (context) => PlacePicker(
-    //      apiKey: "AIzaSyCxyFsUuFODYNFkLSNabseR9_VAWX9u21Y",
-    // Put YOUR OWN KEY here.
-    //      onPlacePicked: (result) {
-    //       print(result.geometry.location);
-    //      Navigator.of(context).pop();
-    //    },
-    //       initialPosition: SearchAddressMap.kInitialPosition,
-    //       enableMapTypeButton: false,
-    //      automaticallyImplyAppBarLeading: true,
-    //    useCurrentLocation: true,
-    //   usePinPointingSearch: true,
-    //     enableMyLocationButton: false,
-    //     usePlaceDetailSearch: true,
-    //     autocompleteLanguage: "es",
-    //     selectedPlaceWidgetBuilder:
-    //         (_, selectedPlace, state, isSearchBarFocused) {
-    //       print("state: $state, isSearchBarFocused: $isSearchBarFocused");
-    //      String lat = "";
-    //     String lng = "";
-//
-    //          if (state != SearchingState.Searching) {
-    //          lat = selectedPlace.geometry.location.lat.toString();
-    //        lng = selectedPlace.geometry.location.lng.toString();
-    //    }
-    //  return isSearchBarFocused
-    //       ? Container()
-    //     : FloatingCard(
-    //            bottomPosition:
-    //               0.0, // MediaQuery.of(context) will cause rebuild. See MediaQuery document for the information.
-    //           leftPosition: 0.0,
-    //           rightPosition: 0.0,
-    //           width: 500,
-    //           borderRadius: BorderRadius.circular(12.0),
-    //           child: state == SearchingState.Searching
-    //               ? Center(child: CircularProgressIndicator())
-    //               : Container(
-    //                   child: Column(
-    //                     children: [
-    //                       Text(selectedPlace.name),
-    //                       //Text("Lat: $lat Lnt: $lng"),
-
-    //                     RaisedButton(
-    //                     child: Text("Guardar Direccion"),
-    //                   onPressed: () {
-    //                   latitud =
-    //                     selectedPlace.geometry.location.lat;
-    //               longitud =
-    //                 selectedPlace.geometry.location.lng;
-    //           ubicacionCtrl.text = selectedPlace.name;
-    // IMPORTANT: You MUST manage selectedPlace data yourself as using this build will not invoke onPlacePicker as
-    //            this will override default 'Select here' Button.
-    //         print(
-    //           "do something with [selectedPlace] data");
-    //     Navigator.of(context).pop();
-    // },
-    //  ),
-    // ],
-    // ),
-    // ),
-    //);
-    // },
-    // ),
-    //),
-    //);
   }
 }

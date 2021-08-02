@@ -10,7 +10,7 @@ class CustomHeader extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
 
     return Container(
-      width: screenSize.width,
+      //width: screenSize.width,
       child: FittedBox(
         fit: BoxFit.cover,
         child: Container(

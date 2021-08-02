@@ -11,6 +11,7 @@ void success(
   Function f = null,
 }) {
   CoolAlert.show(
+    barrierDismissible: false,
     context: context,
     type: CoolAlertType.success,
     title: title,
