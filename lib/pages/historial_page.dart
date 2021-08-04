@@ -53,7 +53,7 @@ class _HistorialPageState extends State<HistorialPage> {
       body: loading
           ? Center(child: CircularProgressIndicator())
           : FutureBuilder(
-            future: rating.getByCompany(preferences.nombreAfiliacion),
+            future: preferences.tipoUsuario=="normal"?rating.getRatingByUser(preferences.email) :rating.getByCompany(preferences.nombreAfiliacion),
             builder: (context, snapshot) {
               if(snapshot.hasData){
               return SafeArea(

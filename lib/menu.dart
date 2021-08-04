@@ -90,11 +90,10 @@ class _MenuBarState extends State<MenuBar> {
                       leading: const Icon(Icons.settings, size: 20),
                       title: Text("Usuario"),
                       onTap: () {
-                       /* Navigator.pushReplacementNamed(context, registerExtra,
-                       arguments: preferences.email);*/
-                      }
-                    );
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(preferences.email)));
                         }
+                      );
+                      }
                         
                        
                       },
@@ -102,7 +101,9 @@ class _MenuBarState extends State<MenuBar> {
                     ListTile(
                       leading: const Icon(Icons.pages, size: 20),
                       title: Text("Terminos y condiciones"),
-                      onTap: () => {},
+                      onTap: () => {
+                        Navigator.pushNamed(context, terminosCondiciones)
+                      },
                     ),
                     SizedBox(height: 10),
                     _authWidget(),

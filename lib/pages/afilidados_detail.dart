@@ -29,13 +29,40 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
   UserPreferences preferences = new UserPreferences();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   AppState appState = new AppState();
-
+  List<Widget> stars = [];
+  int cantidadEstrellas = 5;
+  int puntaje = 5;
   setCalificando(bool val) {
     setState(() {
       isCalificando = val;
     });
   }
 
+  @override
+  void initState() {
+    stars = [Icon(
+        Icons.star,
+        color: Colors.yellow.shade700,
+        size: 35.0,
+      ),Icon(
+        Icons.star,
+        color: Colors.yellow.shade700,
+        size: 35.0,
+      ),Icon(
+        Icons.star,
+        color: Colors.yellow.shade700,
+        size: 35.0,
+      ),Icon(
+        Icons.star,
+        color: Colors.yellow.shade700,
+        size: 35.0,
+      ),Icon(
+        Icons.star,
+        color: Colors.yellow.shade700,
+        size: 35.0,
+      )];
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
@@ -89,7 +116,7 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
         context: context,
         builder: (_) => AlertDialog(
           title: Text(title),
-          content: _rating(5),
+          content: _rating(4),
           actions: <Widget>[
             MaterialButton(
               child: Text('Guardar calificación'),
@@ -204,12 +231,10 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
     );
   }
 
-  Widget _rating(
-    double value,
-  ) {
-    List<Widget> stars = [];
+  Widget _rating(double value) {
+    //stars = 
     int total = value.toInt();
-
+    //int cantidadEstrellas = 2;
     int halfs = 0;
     double rest = value - total;
 
@@ -219,44 +244,92 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
       else
         halfs += 1;
     }
-    for (int i = 0; i < total; ++i) {
-      stars.add(GestureDetector(
-        onTap: () {
-          handleCalificar(i + 1);
-        },
-        child: Icon(
-          Icons.star,
-          color: Colors.yellow.shade700,
-          size: 35.0,
-        ),
-      ));
-    }
+    // if (stars.length==0) {
+    //   for (int i = 0; i < total; ++i) {
+    //   stars.add(GestureDetector(
+    //     onTap: () {
+    //       for (var j = 0; j <= i; j++) {
+    //         print('j:'+j.toString());
+    //         stars[j] =(Icon(
+    //           Icons.star,
+    //           color: Colors.yellow.shade700,
+    //           size: 35.0,
+    //         ));
+            
+    //       }
+    //       for (var k = i+1; k < total; k++) {
+    //         print('k:'+k.toString());
+    //         stars[k] =(Icon(
+    //           Icons.star_border,
+    //           color: Colors.yellow.shade700,
+    //           size: 35.0,
+    //         ));
+    //       }
+    //       setState(() {
+              
+    //         });
+    //       handleCalificar(i + 1);
+    //     },
+    //     child: Icon(
+    //       Icons.star_border,
+    //       color: Colors.yellow.shade700,
+    //       size: 35.0,
+    //     ),
+    //   ));
+    // }
+    // }
+    
+    // if (halfs == 1) {
+    //   stars.add(Icon(Icons.star_half, color: Colors.yellow.shade700));
+    // }
 
-    if (halfs == 1) {
-      stars.add(Icon(Icons.star_half, color: Colors.yellow.shade700));
-    }
-
+    print(stars);
     return Container(
       height: _size.height * 0.2,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          ...stars,
-          // SizedBox(width: 15.0),
-          /* GestureDetector(
-            onTap: () {},
-            child: Text(
-              "$value",
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.grey,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ) */
-        ],
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        itemCount: 5,
+        itemBuilder: (BuildContext context, int index) {
+          
+        return estrella(stars[index],index);
+       },
       ),
+    );
+  }
+
+  Widget estrella(Icon icon,int i){
+    return GestureDetector(
+      onTap: (){
+          for (var j = 0; j <= i; j++) {
+            print('j:'+j.toString());
+            stars[j] =(
+              Icon(
+              Icons.star,
+              color: Colors.yellow.shade700,
+              size: 35.0,
+            )
+            );
+            
+          }
+          for (var k = i+1; k < cantidadEstrellas; k++) {
+            print('k:'+k.toString());
+            stars[k] =(
+              Icon(
+              Icons.star_border,
+              color: Colors.yellow.shade700,
+              size: 35.0,
+            )
+            );
+          }
+          puntaje = i+1;
+          setState(() {
+              
+            });
+        
+        
+      },
+      child: icon,
     );
   }
 
@@ -275,7 +348,13 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
           ),
         ),
         child: Center(
-          child: _rating(5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _rating(5),
+              IconButton(icon: Icon(Icons.send), onPressed: (){handleCalificar(puntaje);})
+            ],
+          ),
         ),
       );
     }

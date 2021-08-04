@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:places_app/components/afiliados_slider.dart';
@@ -151,30 +153,46 @@ class _HomePageState extends State<HomePage> {
                       Expanded(child: Container()),
                       Padding(
                         padding: const EdgeInsets.only(right: 20, top: 20),
-                        child: Container(
-                            decoration: BoxDecoration(
-                               color: Colors.white70,
-                                border: Border.all(
-                                  color: Colors.red[500],
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30))),
-                            child: Center(
-                                                          child: IconButton(
-                                  icon: Icon(Icons.add,size: 20,color: Colors.redAccent,),
-                                  onPressed: () {
-                                    if (anuncios[index].link.isNotEmpty) {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                WebViewComponent(
-                                                    anuncios[index].link)),
-                                      );
-                                    }
-                                  }),
-                            )),
-                      ),
+                        child: Center(
+                          child: RaisedButton(
+                            color: Colors.white60,
+                            shape:  Border.all(
+                              color: Colors.red,
+                              width: 1.0,
+                            ),
+                            child: Row(
+                              children: [
+                                Text('Ver')
+                              // })
+                              ],
+                            ),
+                            onPressed:(){
+                              if (anuncios[index].link.isNotEmpty) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            WebViewComponent(
+                                                anuncios[index].link)),
+                                  );
+                                }
+                            }
+                          
+                              //                         child: IconButton(
+                              // icon: Icon(Icons.add,size: 20,color: Colors.redAccent,),
+                              // onPressed: () {
+                              //   if (anuncios[index].link.isNotEmpty) {
+                              //     Navigator.push(
+                              //       context,
+                              //       MaterialPageRoute(
+                              //           builder: (context) =>
+                              //               WebViewComponent(
+                              //                   anuncios[index].link)),
+                              //     );
+                              //   }
+                              // }),
+                        )),
+                      )
                     ],
                   ),
                 ],

@@ -8,6 +8,7 @@ import 'package:places_app/pages/reset_password_page.dart';
 
 import 'package:flutter/material.dart';
 import 'package:places_app/pages/register_page.dart';
+import 'package:places_app/pages/tutorial/terminos_condiciones.dart';
 import 'package:places_app/pages/tutorial/tutorial_page.dart';
 import 'package:places_app/screens/home_screen.dart';
 
@@ -20,6 +21,7 @@ const categorias = "categorias";
 const registroAfilicacion = "registroAfiliacion";
 const resetPassword = "resetPassword";
 const queTePaso = "queTePaso";
+const terminosCondiciones = "terminosCondiciones";
 
 final routes = {
   home: (BuildContext context) => HomeScreen(),
@@ -31,4 +33,5 @@ final routes = {
   registroAfilicacion: (_) => RegistroAfiliacion(),
   resetPassword: (BuildContext context) => ResetPasswordPage(),
   queTePaso: (BuildContext context) => QueTePasoPage(),
+  terminosCondiciones: (BuildContext context) => TerminosCondiciones()
 };

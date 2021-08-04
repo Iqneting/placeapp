@@ -87,6 +87,11 @@ class Rating {
     return resp.docs.map((doc) => Rating.fromMap(doc.data(), doc.id)).toList();
   }
 
+  Future<List<Rating>> getRatingByUser(String user) async {
+    final resp = await api.getWhere('usuario_id', user);
+    return resp.docs.map((doc) => Rating.fromMap(doc.data(), doc.id)).toList();
+  }
+
   Future<List<Rating>> getByCompany(String company) async {
     final resp = await api.getWhere('nombre_afiliacion', company);
     return resp.docs.map((doc) => Rating.fromMap(doc.data(), doc.id)).toList();
