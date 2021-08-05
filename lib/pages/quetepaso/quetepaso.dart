@@ -78,7 +78,7 @@ class QueTePasoPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 _itemMenu(
-                  "¿Extorción?",
+                  "Extorsión policial",
                   Icons.policy,
                   context,
                   TipoQueTePaso.MeParoUnaPatrulla,
@@ -256,11 +256,11 @@ class QueTePasoPage extends StatelessWidget {
                   Text(
                     "Llama al: ",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "5552089898",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: 20,),
                   ),
                   Expanded(
                     child: Container(),
@@ -369,17 +369,26 @@ class QueTePasoPage extends StatelessWidget {
                   // )
                 ],
               ),
-              Row(
+              Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Row(
+                
                 children: [
                   Text(
                     "Teléfono de emergencia de seguro: ",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white, fontWeight: FontWeight.bold,fontSize: 20,),
                         overflow: TextOverflow.ellipsis,
                   ),
+                  
+                ],
+              ),
+              ),
+              Row(
+                children: [
                   Text(
                     preferences.telefonoPoliza,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: 20),
                   ),
                   Expanded(
                     child: Container(),
@@ -387,7 +396,7 @@ class QueTePasoPage extends StatelessWidget {
                   IconButton(
                       icon: Icon(
                         Icons.phone,
-                        color: Colors.white,
+                        color: Colors.white
                       ),
                       onPressed: () async {
                         final String phone =
@@ -395,7 +404,7 @@ class QueTePasoPage extends StatelessWidget {
                         await launch("tel://$phone");
                       })
                 ],
-              ),
+              )
             ],
           ),
         ),
@@ -472,13 +481,13 @@ class QueTePasoPage extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Text(
-                    "Verifica si se llevaron al corralón a tu auto llamando al siguiente número:",
+                    "Verifica si se llevaron al corralón tu auto llamando al siguiente número:",
                     style: TextStyle(
                       color: kBaseTextTitle,
                       fontSize: 20,
                       fontWeight: FontWeight.normal,
                     ),
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.justify,
                   )),
                 ],
               ),
@@ -487,11 +496,11 @@ class QueTePasoPage extends StatelessWidget {
                   Text(
                     "Locatel: ",
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+                        color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     "5556581111",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.white,fontSize: 20,),
                   ),
                   Expanded(
                     child: Container(),
@@ -588,7 +597,7 @@ class QueTePasoPage extends StatelessWidget {
                         color: kBaseTextTitle,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.justify,
                   )),
                 ],
               ),

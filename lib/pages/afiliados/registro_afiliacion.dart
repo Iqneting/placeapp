@@ -388,6 +388,8 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
           onPlacePicked: (result) {
             print(result.formattedAddress);
             ubicacionCtrl.text = result.formattedAddress;
+            latitud = result.geometry.location.lat;
+            longitud = result.geometry.location.lng;
             Navigator.of(context).pop();
           },
           initialPosition: LatLng(19.3764253, -99.0573512),

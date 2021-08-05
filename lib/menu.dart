@@ -81,7 +81,7 @@ class _MenuBarState extends State<MenuBar> {
                       leading: const Icon(Icons.settings, size: 20),
                       title: Text("Completar Registro"),
                       onTap: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(preferences.email)));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(preferences.email,true)));
                         //Navigator.pushReplacementNamed(context, registerExtra,arguments: preferences.email);
                       }
                     );
@@ -90,7 +90,7 @@ class _MenuBarState extends State<MenuBar> {
                       leading: const Icon(Icons.settings, size: 20),
                       title: Text("Usuario"),
                       onTap: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(preferences.email)));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(preferences.email,false)));
                         }
                       );
                       }

@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => RegisterExtraPage(user.email)));
+                builder: (context) => RegisterExtraPage(user.email,true)));
       }
     }
   }

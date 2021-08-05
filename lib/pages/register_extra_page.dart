@@ -16,8 +16,9 @@ import '../const/const.dart';
 class RegisterExtraPage extends StatefulWidget {
   //RegisterExtraPage({Key key}) : super(key: key);
   final String emailArg;
+  final bool isNew;
 
-  const RegisterExtraPage(this.emailArg);
+  const RegisterExtraPage(this.emailArg, this.isNew);
   @override
   _RegisterExtraPageState createState() => _RegisterExtraPageState();
 }
@@ -42,6 +43,20 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
   UserPreferences preferences = new UserPreferences();
   bool isSubmitting = false;
   AppState _appState;
+  Usuario usuarioEditar;
+  Future<Usuario> futureUser;
+  DateTime _dateLicencia;
+    DateTime _dateSeguro;
+    DateTime _datePagoTendencia;
+    DateTime _dateVencimientoVerificacion;
+    bool isFirstLoad = true;
+
+  @override
+  void initState() { 
+    futureUser = userService.getUsuario(widget.emailArg);
+    super.initState();
+    
+  }
 
   //String emailArg = null;
   UserService userService = UserService();
@@ -57,10 +72,8 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
         return;
       } else {
         //TODO: continuar registro 2
-        _formKey.currentState.save();
-        setState(() {
-          isSubmitting = false;
-        });
+        
+        
         Usuario user;
         bool bandera = false;
         if (widget.emailArg != null) {
@@ -72,6 +85,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           user.fechaPagoTenencia = _fechaPagoTenenciaController.text;
           user.fechaVencimientoLicencia = _fechaVencimientoLicenciaController.text;
           user.fechaVencimientoPoliza = _fechaVencimientoPolizaController.text;
+          user.vencimientoVerificacio = _vencimientoVerificacioController.text;
           bandera = await userService.updateUser(user, user.id);
           preferences.email = user.correo;
           preferences.numeroPoliza = user.seguro;
@@ -80,7 +94,10 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           preferences.telefonoPoliza = _telefonoSeguroController.text;
           preferences.numeroPoliza = _numeroPolizaSeguroController.text;
         }
-
+        _formKey.currentState.save();
+        setState(() {
+          isSubmitting = false;
+        });
         if (bandera) {
           _appState.isInvitado = false;
           success(context, "Perfil Completado", "Su registro ha sido exitoso",
@@ -88,7 +105,8 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             setState(() {
               isSubmitting = false;
             });
-            Navigator.of(context).pushNamedAndRemoveUntil(home, (Route<dynamic> route) => false);
+            //Navigator.of(context).pushNamedAndRemoveUntil(home, (Route<dynamic> route) => false);
+            Navigator.of(context).popUntil(ModalRoute.withName(home));
           });
         }
       }
@@ -105,10 +123,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
     mq = MediaQuery.of(context);
     _appState = Provider.of<AppState>(context);
     //emailArg = ModalRoute.of(context).settings.arguments;
-    DateTime _dateLicencia;
-    DateTime _dateSeguro;
-    DateTime _datePagoTendencia;
-    DateTime _dateVencimientoVerificacion;
+    
 
     final logo = Image.asset(
       "assets/images/logo.png",
@@ -130,6 +145,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             labelText: "Placa",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
+          if(widget.isNew==false){return null;}
           if (value.isEmpty) {
             return 'Ingrese su placa';
           }
@@ -155,6 +171,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             labelText: "Número licencia",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
+          if(widget.isNew==false){return null;}
           if (value.isEmpty) {
             return 'Número es requerido';
           }
@@ -180,6 +197,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             labelText: "Fecha vencimiento licencia",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
+          if(widget.isNew==false){return null;}
           if (value.isEmpty) {
             return 'Ingrese la vigencia de su licencia';
           }
@@ -200,10 +218,11 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
                 borderSide: BorderSide(
               color: Colors.red,
             )),
-            hintText: "Introduce vencimeinto de verificacion",
-            labelText: "Fecha vencimiento verificacion",
+            hintText: "Introduce vencimiento de verificación",
+            labelText: "Fecha vencimiento verificación",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
+          if(widget.isNew==false){return null;}
           if (value.isEmpty) {
             return 'Ingrese la vigencia de su licencia';
           }
@@ -229,6 +248,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             labelText: "Número póliza de seguro",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
+          if(widget.isNew==false){return null;}
           if (value.isEmpty) {
             return 'Número es requerido';
           }
@@ -254,6 +274,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             labelText: "Fecha vencimiento póliza de seguro",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
+          if(widget.isNew==false){return null;}
           if (value.isEmpty) {
             return 'Ingrese la vigencia de su póliza de seguro';
           }
@@ -279,6 +300,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             labelText: "Fecha pago tenencia",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
+          if(widget.isNew==false){return null;}
           if (value.isEmpty) {
             return 'Ingrese fecha pago tenencia';
           }
@@ -304,6 +326,7 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
             labelText: "Teléfono para emergencia de tu seguro",
             hintStyle: TextStyle(color: kBaseColor)),
         validator: (String value) {
+          if(widget.isNew==false){return null;}
           if (value.isEmpty) {
             return 'Teléfono es requerido';
           }
@@ -325,9 +348,8 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
               context: context,
-              initialDate:
-                  _dateLicencia == null ? DateTime.now() : _dateLicencia,
-              firstDate: _dateLicencia == null ? DateTime.now() : _dateLicencia,
+              initialDate:widget.isNew?_dateLicencia == null ? DateTime.now() : _dateLicencia:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
+              firstDate: widget.isNew?_dateLicencia == null ? DateTime.now() : _dateLicencia:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
               lastDate: DateTime(2050),
               cancelText: 'Cancelar',
             ).then((date) {
@@ -353,10 +375,9 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
                     context: context,
-                    initialDate:
-                        _dateSeguro == null ? DateTime.now() : _dateSeguro,
-                    firstDate:
-                        _dateSeguro == null ? DateTime.now() : _dateSeguro,
+                    initialDate:widget.isNew?_dateSeguro == null ? DateTime.now() : _dateSeguro:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000')
+                        ,
+                    firstDate:widget.isNew?_dateSeguro == null ? DateTime.now() : _dateSeguro:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
                     lastDate: DateTime(2050),
                     cancelText: 'Cancelar')
                 .then((date) {
@@ -383,12 +404,9 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
               context: context,
-              initialDate: _dateVencimientoVerificacion == null
-                  ? DateTime.now()
-                  : _dateVencimientoVerificacion,
-              firstDate: _dateVencimientoVerificacion == null
-                  ? DateTime.now()
-                  : _dateVencimientoVerificacion,
+              initialDate: widget.isNew?_dateVencimientoVerificacion == null? DateTime.now(): _dateVencimientoVerificacion:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
+
+              firstDate: widget.isNew?_dateVencimientoVerificacion == null? DateTime.now(): _dateVencimientoVerificacion:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
               lastDate: DateTime(2050),
               cancelText: 'Cancelar',
             ).then((date) {
@@ -413,12 +431,8 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
               context: context,
-              initialDate: _datePagoTendencia == null
-                  ? DateTime.now()
-                  : _datePagoTendencia,
-              firstDate: _datePagoTendencia == null
-                  ? DateTime.now()
-                  : _datePagoTendencia,
+              initialDate: widget.isNew?_datePagoTendencia == null? DateTime.now(): _datePagoTendencia:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
+              firstDate: widget.isNew?_datePagoTendencia == null? DateTime.now(): _datePagoTendencia:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
               lastDate: DateTime(2050),
               cancelText: 'Cancelar',
             ).then((date) {
@@ -481,10 +495,9 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
       ],
     );
 
-    return WillPopScope(
-      onWillPop: () async => false,
-        child: Scaffold(
-        body: Form(
+    
+
+    final _formulario = Form(
           key: _formKey,
           child: BlurContainer(
             isLoading: isSubmitting,
@@ -493,7 +506,6 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
               SingleChildScrollView(
                 padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 36.0),
                 child: Container(
-                  //height: mq.size.height,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -536,10 +548,41 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
               ),
             ],
           ),
+        );
+      return WillPopScope(
+      onWillPop: () async => widget.isNew?false:true,
+        child: Scaffold(
+        body: widget.isNew?
+        _formulario
+        :
+        FutureBuilder(
+          future: futureUser,
+          builder: (BuildContext context, AsyncSnapshot<Usuario> snapshot) {
+            if (snapshot.hasData && snapshot.data != null) {
+              if (isFirstLoad) {
+                usuarioEditar = snapshot.data;
+                isFirstLoad=false;
+                _placaController.text = snapshot.data.placa;
+              _telefonoSeguroController.text = snapshot.data.telefonoSeguro;
+              _numeroPolizaSeguroController.text = snapshot.data.seguro;
+              _fechaVencimientoPolizaController.text = snapshot.data.fechaVencimientoPoliza;
+              _licenciaController.text = snapshot.data.licencia;
+              _fechaVencimientoLicenciaController.text = snapshot.data.fechaVencimientoLicencia;
+              _vencimientoVerificacioController.text = snapshot.data.vencimientoVerificacio;
+              _fechaPagoTenenciaController.text = snapshot.data.fechaPagoTenencia;
+              }
+              
+              return _formulario;
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+            
+          },
         ),
       ),
     );
   }
+  
 
   void showAlert(BuildContext context, String title, String error) {
     var messageError;

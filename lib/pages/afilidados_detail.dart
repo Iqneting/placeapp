@@ -87,27 +87,25 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
 
   Widget _body() {
     return SafeArea(
-        child: Stack(
-      children: [
-        Container(
-          height: _size.height * 0.9,
+        child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _fotoMain(),
-              TitleComponent("Fotos"),
-              FotosSlider(fotos: widget.afiliado.fotos),
-              SizedBox(height: 20.0),
-              _details(),
-            ],
+      children: [
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _fotoMain(),
+                TitleComponent("Fotos"),
+                FotosSlider(fotos: widget.afiliado.fotos),
+                SizedBox(height: 20.0),
+                _details(),
+              ],
+            ),
           ),
-        ),
-        Positioned(
-          child: _calificar(),
-          bottom: 20.0,
-        ),
+          _calificar(),
       ],
-    ));
+    ),
+        ));
   }
 
   showAlert(BuildContext context, String title) {
@@ -244,44 +242,6 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
       else
         halfs += 1;
     }
-    // if (stars.length==0) {
-    //   for (int i = 0; i < total; ++i) {
-    //   stars.add(GestureDetector(
-    //     onTap: () {
-    //       for (var j = 0; j <= i; j++) {
-    //         print('j:'+j.toString());
-    //         stars[j] =(Icon(
-    //           Icons.star,
-    //           color: Colors.yellow.shade700,
-    //           size: 35.0,
-    //         ));
-            
-    //       }
-    //       for (var k = i+1; k < total; k++) {
-    //         print('k:'+k.toString());
-    //         stars[k] =(Icon(
-    //           Icons.star_border,
-    //           color: Colors.yellow.shade700,
-    //           size: 35.0,
-    //         ));
-    //       }
-    //       setState(() {
-              
-    //         });
-    //       handleCalificar(i + 1);
-    //     },
-    //     child: Icon(
-    //       Icons.star_border,
-    //       color: Colors.yellow.shade700,
-    //       size: 35.0,
-    //     ),
-    //   ));
-    // }
-    // }
-    
-    // if (halfs == 1) {
-    //   stars.add(Icon(Icons.star_half, color: Colors.yellow.shade700));
-    // }
 
     print(stars);
     return Container(
@@ -336,11 +296,8 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
   Widget _calificar() {
     if (isCalificando) {
       return Container(
-        width: _size.width * 0.8,
-        margin: EdgeInsets.only(
-          left: _size.width * 0.1,
-        ),
-        height: 50.0,
+        margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+        height: 40.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
           border: Border.all(
@@ -362,10 +319,7 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
     return GestureDetector(
       onTap: () => setCalificando(true),
       child: Container(
-        width: _size.width * 0.8,
-        margin: EdgeInsets.only(
-          left: _size.width * 0.1,
-        ),
+        margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
         height: 40.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.0),
@@ -397,6 +351,7 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
     return Container(
       width: double.infinity,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             children: [
@@ -469,18 +424,11 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
             margin: EdgeInsets.only(right: 15.0),
             child: icon,
           ),
-          Flexible(
-            child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Text(
-                  telefono ?? '',
-                  style: TextStyle(
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.w400,
-                  ),
-                )
-              ],
+          new Text(
+            telefono ?? '',
+            style: TextStyle(
+              fontSize: 17.0,
+              fontWeight: FontWeight.w400,
             ),
           ),
           Expanded(
@@ -513,12 +461,12 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
             child: icon,
           ),
             Text(
-                  "Como llegar" ?? '',
-                  style: TextStyle(
-                    fontSize: 17.0,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+              "Cómo llegar" ?? '',
+              style: TextStyle(
+                fontSize: 17.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
             
           Expanded(
             child: Container(),
@@ -545,13 +493,13 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
 
   Widget _fotoMain() {
     return Container(
-      height: _size.height * 0.33,
+      // height: _size.height * 0.33,
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: _size.height * 0.25,
+            height: 200,
             child: Image.network(
               widget.afiliado.img,
               fit: BoxFit.cover,

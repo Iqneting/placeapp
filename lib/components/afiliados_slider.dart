@@ -37,6 +37,7 @@ class _AfiliadosCarouselState extends State<AfiliadosCarousel> {
     setLoading(true);
     if (widget.categoria != null) {
       afiliados = await service.loadByCategoria(widget.categoria);
+      print(afiliados);
     } else {
       afiliados = await service.loadByRating();
     }
@@ -52,9 +53,9 @@ class _AfiliadosCarouselState extends State<AfiliadosCarousel> {
   @override
   Widget build(BuildContext context) {
     appState = Provider.of<AppState>(context);
-    if (widget.categoria != null) {
-      afiliados = appState.afiliados;
-    }
+    // if (widget.categoria != null) {
+    //   afiliados = appState.afiliados;
+    // }
     _size = MediaQuery.of(context).size;
     if (isLoading) {
       return Center(
@@ -127,13 +128,17 @@ class _AfiliadosCarouselState extends State<AfiliadosCarousel> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    a.nombre,
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 22.0,
-                      color: Colors.grey.shade600,
+                  Expanded(
+                    child: Text(
+                      a.nombre,
+                      textAlign: TextAlign.left,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 22.0,
+                        color: Colors.grey.shade600,
+              
+                      ),
                     ),
                   ),
                   Row(children: [

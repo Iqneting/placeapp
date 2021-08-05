@@ -93,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
             preferences.tipoUsuario = "normal";
             success(context, "Registro de Usuario", "Su registro ha sido exitoso",
                 f: () {
-              Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(_emailController.text)));
+              Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(_emailController.text,true)));
             });
           }
           
