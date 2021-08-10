@@ -19,7 +19,7 @@ class Tutorial {
       );
   static Future<List<Tutorial>> fetchData() async {
     print("api.orderBy");
-    final resp = await api.orderBy("numeroSlide");
+    final resp = await api.orderBy("numeroSlide",);
     //final resp = await api.getDataCollection();
     return resp.docs.map((doc) => Tutorial.fromMap(doc.data(), doc.id)).toList();
   }

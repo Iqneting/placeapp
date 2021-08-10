@@ -348,8 +348,8 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
               context: context,
-              initialDate:widget.isNew?_dateLicencia == null ? DateTime.now() : _dateLicencia:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
-              firstDate: widget.isNew?_dateLicencia == null ? DateTime.now() : _dateLicencia:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
+              initialDate:widget.isNew?_dateLicencia == null ? DateTime.now() : _dateLicencia:usuarioEditar.fechaVencimientoLicencia==''?DateTime.now():DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
+              firstDate: widget.isNew?_dateLicencia == null ? DateTime.now() : _dateLicencia:usuarioEditar.fechaVencimientoLicencia==''?DateTime.now():DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
               lastDate: DateTime(2050),
               cancelText: 'Cancelar',
             ).then((date) {
@@ -375,9 +375,9 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
                     context: context,
-                    initialDate:widget.isNew?_dateSeguro == null ? DateTime.now() : _dateSeguro:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000')
+                    initialDate:widget.isNew?_dateSeguro == null ? DateTime.now() : _dateSeguro:DateTime.parse(usuarioEditar.fechaVencimientoPoliza+' 00:00:00.000')
                         ,
-                    firstDate:widget.isNew?_dateSeguro == null ? DateTime.now() : _dateSeguro:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
+                    firstDate:widget.isNew?_dateSeguro == null ? DateTime.now() : _dateSeguro:DateTime.parse(usuarioEditar.fechaVencimientoPoliza+' 00:00:00.000'),
                     lastDate: DateTime(2050),
                     cancelText: 'Cancelar')
                 .then((date) {
@@ -404,9 +404,9 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
               context: context,
-              initialDate: widget.isNew?_dateVencimientoVerificacion == null? DateTime.now(): _dateVencimientoVerificacion:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
+              initialDate: widget.isNew?_dateVencimientoVerificacion == null? DateTime.now(): _dateVencimientoVerificacion:DateTime.parse(usuarioEditar.vencimientoVerificacio+' 00:00:00.000'),
 
-              firstDate: widget.isNew?_dateVencimientoVerificacion == null? DateTime.now(): _dateVencimientoVerificacion:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
+              firstDate: widget.isNew?_dateVencimientoVerificacion == null? DateTime.now(): _dateVencimientoVerificacion:DateTime.parse(usuarioEditar.vencimientoVerificacio+' 00:00:00.000'),
               lastDate: DateTime(2050),
               cancelText: 'Cancelar',
             ).then((date) {
@@ -431,8 +431,8 @@ class _RegisterExtraPageState extends State<RegisterExtraPage> {
           onPressed: () {
             showDatePicker(
               context: context,
-              initialDate: widget.isNew?_datePagoTendencia == null? DateTime.now(): _datePagoTendencia:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
-              firstDate: widget.isNew?_datePagoTendencia == null? DateTime.now(): _datePagoTendencia:DateTime.parse(usuarioEditar.fechaVencimientoLicencia+' 00:00:00.000'),
+              initialDate: widget.isNew?_datePagoTendencia == null? DateTime.now(): _datePagoTendencia:DateTime.parse(usuarioEditar.fechaPagoTenencia+' 00:00:00.000'),
+              firstDate: widget.isNew?_datePagoTendencia == null? DateTime.now(): _datePagoTendencia:DateTime.parse(usuarioEditar.fechaPagoTenencia+' 00:00:00.000'),
               lastDate: DateTime(2050),
               cancelText: 'Cancelar',
             ).then((date) {

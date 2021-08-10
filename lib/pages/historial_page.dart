@@ -101,7 +101,6 @@ class _HistorialPageState extends State<HistorialPage> {
     return Container(
       width: _size.width,
       padding: EdgeInsets.symmetric(horizontal: 7.0),
-      height: 130.0,
       child: Column(
         children: [
           _reviewTitle(r),
