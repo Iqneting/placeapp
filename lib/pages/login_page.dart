@@ -128,9 +128,22 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void handleLoginWithGoogle() async {
+    
     User user = await GoogleSignInService.signInWithGoogle();
     await handleGoHome(user: user);
   }
+
+  void _openLoadingDialog(BuildContext context) {
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: CircularProgressIndicator(),
+      );
+    },
+  );
+}
 
   void handleLoginWithFacebook() async {
     UserCredential user = await FacebookSignInService.signInWithFacebook();

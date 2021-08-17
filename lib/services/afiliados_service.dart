@@ -6,6 +6,8 @@ import 'package:uuid/uuid.dart';
 
 class AfiliadosService {
   Api afiliadosDB = new Api('afiliados');
+  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  CollectionReference ref;
   //AfiliadosService() {}
 
   void crearAfiliado(Afiliado afiliado) async {
@@ -13,7 +15,9 @@ class AfiliadosService {
   }
 
   Future<List<Afiliado>> getByCategoria() async {
-    var result = await afiliadosDB.getDataCollection();
+    //var result = await afiliadosDB.getDataCollection();
+    ref = _db.collection("afiliados");
+    var result = await ref.where("aprobado", isEqualTo: true).get();
     List<Afiliado> data = [];
     data =
         result.docs.map((doc) => Afiliado.fromMap(doc.data(), doc.id)).toList();
@@ -22,7 +26,8 @@ class AfiliadosService {
 
   //
   Future<List<Afiliado>> loadByRating() async {
-    var result = await afiliadosDB.getDataCollection();
+    ref = _db.collection("afiliados");
+    var result = await ref.where("aprobado", isEqualTo: true).get();
     List<Afiliado> data = [];
     data =
         result.docs.map((doc) => Afiliado.fromMap(doc.data(), doc.id)).toList();
@@ -30,7 +35,9 @@ class AfiliadosService {
   }
 
   Future<List<Afiliado>> loadByCategoria(Categoria c) async {
-    var result = await afiliadosDB.getWhere('categoria', c.nombre);
+    //var result = await afiliadosDB.getWhere('categoria', c.nombre);
+    ref = _db.collection("afiliados");
+    var result = await ref.where("categoria", isEqualTo: c.nombre).where("aprobado", isEqualTo: true).get();
     List<Afiliado> data = [];
     data =
         result.docs.map((doc) => Afiliado.fromMap(doc.data(), doc.id)).toList();

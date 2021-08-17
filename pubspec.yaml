@@ -54,6 +54,7 @@ dependencies:
   map_launcher: ^1.1.1
   google_maps_place_picker: ^1.0.1
   modal_bottom_sheet: ^1.0.0+1
+  advance_pdf_viewer: ^1.2.2
   #google_map_location_picker: ^3.3.4
   #google_places_picker: ^3.0.2
   

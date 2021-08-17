@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "358990322527-sg541e9oja5imb6t3t44lft89jv7h91r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iqneting.places_app",
+            "certificate_hash": "9a629cc2d2ce54c6609c1d3be4aed9d0754ef651"
+          }
+        },
+        {
           "client_id": "358990322527-qa41p6t9kq5soridmvt8lo3v7g9982sr.apps.googleusercontent.com",
           "client_type": 3
         }

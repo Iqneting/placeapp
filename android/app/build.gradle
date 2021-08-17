@@ -27,12 +27,12 @@ apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 apply plugin: 'com.google.gms.google-services'
 
-//def keystoreProperties = new Properties()
-  // def keystorePropertiesFile = rootProject.file('key.properties')
-   //if (keystorePropertiesFile.exists()) {
-    //   keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-   //}
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
 android {
     compileSdkVersion 28
 
@@ -50,27 +50,36 @@ android {
         applicationId "com.iqneting.places_app"
         minSdkVersion 20
         targetSdkVersion 29
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 2
+        versionName "1.1.0"
         multiDexEnabled true
 
     }
+    //Produccion
+    signingConfigs {
+        release {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            shrinkResources false
+            minifyEnabled false
+        }
+    }
 
-   // signingConfigs {
-     //  release {
-       //    keyAlias keystoreProperties['keyAlias']
-         //  keyPassword keystoreProperties['keyPassword']
-           //storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
-           //storePassword keystoreProperties['storePassword']
-       //}
-   //}
-   buildTypes {
-       release {
-        signingConfig signingConfigs.debug
-         shrinkResources false
-         minifyEnabled false
-       }
-   }
+    //Pruebas
+//    buildTypes {
+//        release {
+//         signingConfig signingConfigs.debug
+//          shrinkResources false
+//          minifyEnabled false
+//        }
+//    }
 }
 
 flutter {
