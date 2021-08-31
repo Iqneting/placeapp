@@ -153,7 +153,7 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
       ubicacion: widget.afiliado.ubicacion ?? '',
     );
     if(await rating.validateRating()){
-      return success(context,"Error" ,"Este negocio ya está calificado");
+      return success(context,"Error" ,"Este negocio ya está calificado",true);
     }
 
     rating.save();
@@ -162,7 +162,7 @@ class _AfiliadosDetailsPageState extends State<AfiliadosDetailsPage> {
     Afiliado a = await Afiliado.getById(widget.afiliado.id);
     await a.addRating(calificacion);
     success(context, "Calificación guardada",
-        "su calificacion ha sido guardada correctamente");
+        "su calificacion ha sido guardada correctamente",true);
     setCalificando(false);
   }
 

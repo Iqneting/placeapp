@@ -21,8 +21,6 @@ class UserService {
   Future<Usuario> getUsuario(String email) async {
     final resp = await api.getDocumentById(email);
     if (resp.exists) {
-      print('respuestAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
-      print(resp);
       return Usuario.fromMap(resp.data(), resp.id);
     }
     return null;

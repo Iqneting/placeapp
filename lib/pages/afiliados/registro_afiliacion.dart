@@ -15,7 +15,8 @@ import 'package:places_app/helpers/fotos_helper.dart';
 import 'package:places_app/models/afiliado_model.dart';
 import 'package:places_app/models/categoria_model.dart';
 import 'package:places_app/pages/afiliados/seleccion_localizacion.dart';
-import 'package:places_app/routes/routes.dart';
+import 'package:places_app/routes/constantes.dart';
+import 'package:places_app/routes/routes_generate.dart';
 
 import 'package:places_app/services/db_service.dart';
 import 'package:places_app/shared/user_preferences.dart';
@@ -202,7 +203,7 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
     preferences.email = "";
     preferences.tipoUsuario = "";
     preferences.nombreAfiliacion = "";
-    Navigator.pushReplacementNamed(context, login);
+    Navigator.pushReplacementNamed(context, loginRoute);
   }
 
   void handleAddFoto() async {
@@ -311,10 +312,13 @@ class _RegistroAfiliacionState extends State<RegistroAfiliacion> {
         ubicacion: ubicacionCtrl.text,
         aprobado: false,
       );
+      print(afiliado.toJson());
+      print(afiliado);
       db.crearAfiliado(afiliado);
+      
       alerts.success(context, "Registro exitoso",
-          "Su registro será revisado para su aprobación.", f: () {
-        Navigator.pushReplacementNamed(context, home);
+          "Su registro será revisado para su aprobación.",false,f: () {
+        Navigator.pushReplacementNamed(context, homeRoute);
       });
 
       setIsSaving(false);

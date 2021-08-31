@@ -4,7 +4,7 @@ import 'package:places_app/components/title.dart';
 import 'package:places_app/const/const.dart';
 import 'package:places_app/menu.dart';
 import 'package:places_app/models/afiliado_model.dart';
-import 'package:places_app/routes/routes.dart';
+import 'package:places_app/routes/routes_generate.dart';
 import 'package:places_app/services/afiliados_service.dart';
 import 'package:places_app/services/user_service.dart';
 import 'package:places_app/shared/user_preferences.dart';

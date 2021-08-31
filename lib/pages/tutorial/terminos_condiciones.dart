@@ -53,6 +53,7 @@ class _TerminosCondicionesState extends State<TerminosCondiciones> {
             : PDFViewer(
                 document: document,
                 scrollDirection: Axis.vertical,
+                
                 showPicker: false,
                 zoomSteps:2,);
           } else {

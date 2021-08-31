@@ -4,7 +4,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:places_app/models/afiliado_model.dart';
 import 'package:places_app/models/categoria_model.dart';
 import 'package:places_app/pages/afilidados_detail.dart';
-import 'package:places_app/routes/routes.dart' as routes;
+import 'package:places_app/routes/constantes.dart';
+import 'package:places_app/routes/routes_generate.dart' as routes;
 import 'package:places_app/services/afiliados_service.dart';
 
 import 'package:places_app/storage/App.dart';
@@ -95,7 +96,7 @@ class _AfiliadosCarouselState extends State<AfiliadosCarousel> {
     return GestureDetector(
       onTap: () {
         if (appState.isInvitado) {
-          Navigator.pushNamed(context, routes.login);
+          Navigator.pushNamed(context, loginRoute);
         } else {
           Navigator.push(
             context,

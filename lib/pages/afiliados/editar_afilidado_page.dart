@@ -4,7 +4,8 @@ import 'package:places_app/components/blur_container.dart';
 import 'package:places_app/components/search_address_map.dart';
 import 'package:places_app/models/afiliado_model.dart';
 import 'package:places_app/helpers/alerts_helper.dart' as alerts;
-import 'package:places_app/routes/routes.dart';
+import 'package:places_app/routes/constantes.dart';
+import 'package:places_app/routes/routes_generate.dart';
 import 'package:google_maps_place_picker/google_maps_place_picker.dart';
 import 'package:places_app/services/afiliados_service.dart';
 
@@ -183,8 +184,8 @@ class _EditarAfiliadoPageState extends State<EditarAfiliadoPage> {
           puntos: widget.afiliado.puntos);
       await afiliadosService.updateDocument(afiliado);
       alerts.success(context, "Actualizacion exitosa",
-          "Sus datos fueron actualizados con exito.", f: () {
-        Navigator.pushReplacementNamed(context, home);
+          "Sus datos fueron actualizados con exito.", false,f: () {
+        Navigator.pushReplacementNamed(context, homeRoute);
       });
 
       setIsSaving(false);

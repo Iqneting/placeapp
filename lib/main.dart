@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:places_app/const/const.dart';
 import 'package:places_app/providers/push_notification_provider.dart';
-import 'package:places_app/routes/routes.dart' as routes;
+import 'package:places_app/routes/constantes.dart';
+import 'package:places_app/routes/routes_generate.dart' as routes;
+import 'package:places_app/routes/routes_generate.dart';
 import 'package:places_app/shared/user_preferences.dart';
 import 'package:places_app/storage/App.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +17,7 @@ void main() async {
 
   await userPrefrences.initPrefs();
   //String initialRoute = '/';
-  String initialRoute = userPrefrences.isFirstLoad==true ? routes.tutorial:routes.home;
+  String initialRoute = userPrefrences.isFirstLoad==true ? tutorialRoute:homeRoute;
   runApp(MyApp(initialRoute));
 }
 
@@ -56,7 +58,7 @@ class _MyAppState extends State<MyApp> {
         navigatorKey: navigatorKey,
         title: 'TTA',
         initialRoute: widget.initialRoute,
-        routes: routes.routes,
+        onGenerateRoute: RouteGenerator.generateRoute,
       ),
     );
   }

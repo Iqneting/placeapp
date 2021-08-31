@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:places_app/const/const.dart';
@@ -7,7 +8,9 @@ import 'package:places_app/pages/afiliados/afiliados_home.dart';
 import 'package:places_app/pages/categories/index.dart';
 import 'package:places_app/pages/historial_page.dart';
 import 'package:places_app/pages/home_page.dart';
-import 'package:places_app/routes/routes.dart' as routes;
+import 'package:places_app/routes/arguments/lista_vehiculos_args.dart';
+import 'package:places_app/routes/constantes.dart';
+import 'package:places_app/routes/routes_generate.dart' as routes;
 import 'package:places_app/services/afiliados_service.dart';
 import 'package:places_app/shared/user_preferences.dart';
 
@@ -40,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    //cargarSuscripciones();
     //initData();
     checkTypeUser();
   }
@@ -78,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //`preferences.
       } else {
         SchedulerBinding.instance.addPostFrameCallback((_) {
-          Navigator.of(context).pushNamed(routes.registroAfilicacion);
+          Navigator.of(context).pushNamed(registroAfilicacionRoute);
         });
       }
     } else if (tipoUsrStr == 'normal') {
@@ -206,7 +210,8 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton:(tipoUsuario == TipoUsuario.AFILIADO)? null: FloatingActionButton(
         backgroundColor: kBaseColor,
         onPressed: () {
-          Navigator.pushNamed(context, routes.queTePaso);
+          Navigator.pushNamed(context, listaVehiculosRoute,arguments: ListaVehiculosArgs(preferences.email, false));
+          //Navigator.pushNamed(context, queTePasoRoute);
         },
         child: Icon(Icons.error_outline,size: 40,),
       ),
@@ -219,4 +224,41 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: bottomNavigationBar,
     );
   }
+  void cargarSuscripciones() { //Metodo para cargar preguntas en bruto -- no se utiliza en la app
+    retonarListaPreguntas().forEach((element)async{
+      await FirebaseFirestore.instance.collection('afiliados').add(element);
+    });
+  }
+  
+  
+}
+
+
+
+List<Map<String,dynamic>> retonarListaPreguntas(){
+  List<Map<String,dynamic>> lista;
+  lista = [
+    {
+    "id": "", 
+    "nombre": "Mi comercio online", 
+    "img": "https://res.cloudinary.com/jovannyrch/image/upload/v1630352585/gfqijhjw2msgct3sbuse.jpg", 
+    "telefono": 5298000032, 
+    "rfc": null, 
+    "user": "mmartinez@gmail.com", 
+    "total": 0, 
+    "puntos": 0, 
+    "rating": 0.0, 
+    "aprobado": true, 
+    "fotos": [
+        "https://res.cloudinary.com/jovannyrch/image/upload/v1630352585/dopam3wk3zmvocbc7v2f.jpg", 
+        "https://res.cloudinary.com/jovannyrch/image/upload/v1630352585/zmnomzj6u1cfgamd50ut.jpg"
+    ],
+    "categoria": "Mecánicos",
+    "latitud": 23.286457, 
+    "longitud": -106.38075, 
+    "ubicacion": "Avistamiento, San Erico, 82274 Sin., Mexico"
+}
+
+  ];
+  return lista;
 }

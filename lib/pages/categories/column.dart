@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:places_app/models/categoria_model.dart';
 import 'package:places_app/pages/afiliados_page.dart';
-import 'package:places_app/routes/routes.dart' as routes;
+import 'package:places_app/routes/constantes.dart';
+import 'package:places_app/routes/routes_generate.dart' as routes;
 import 'package:places_app/storage/App.dart';
 import 'package:provider/provider.dart';
 
@@ -72,7 +73,7 @@ class CategoryColumnItem extends StatelessWidget {
             )
           }
         else
-          {Navigator.pushNamed(context, routes.login)}
+          {Navigator.pushNamed(context, loginRoute)}
       },
       child: Container(
         child: Stack(

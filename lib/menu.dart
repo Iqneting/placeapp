@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:places_app/pages/register_extra_page.dart';
-import 'package:places_app/routes/routes.dart';
+import 'package:places_app/pages/vehiculos/lista_vehiculos.dart';
+import 'package:places_app/routes/arguments/lista_vehiculos_args.dart';
+import 'package:places_app/routes/arguments/register_extra_args.dart';
+import 'package:places_app/routes/constantes.dart';
+import 'package:places_app/routes/routes_generate.dart';
 import 'package:places_app/services/user_service.dart';
 import 'package:places_app/shared/user_preferences.dart';
 import 'package:places_app/storage/App.dart';
@@ -63,46 +68,22 @@ class _MenuBarState extends State<MenuBar> {
                       child: Center(child: Text(preferences.tipoUsuario)),
                     ),
                     SizedBox(height: 10),
-                    /*const Divider(),
-                    ListTile(
-                      leading: const Icon(
-                        Icons.star,
-                        size: 20,
-                      ),
-                      title: Text("Reseñas"),
-                      onTap: () {},
-                    ),*/
-                    _buidIsUsuarioNormal()?FutureBuilder<bool>(
-                      future: _buildCompletarRegistro(),
-                      initialData: true,
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if(snapshot.data){
-                          return ListTile(
-                      leading: const Icon(Icons.settings, size: 20),
-                      title: Text("Completar Registro"),
-                      onTap: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(preferences.email,true)));
-                        //Navigator.pushReplacementNamed(context, registerExtra,arguments: preferences.email);
-                      }
-                    );
-                        }else{
-                          return ListTile(
-                      leading: const Icon(Icons.settings, size: 20),
-                      title: Text("Usuario"),
-                      onTap: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) => RegisterExtraPage(preferences.email,false)));
-                        }
-                      );
-                      }
-                        
-                       
-                      },
-                    ):Container(child: null,),
+                    _buidIsUsuarioNormal()?
+                        ListTile(
+                          leading: const Icon(FontAwesomeIcons.carAlt, size: 20),
+                          title: Text("Vehiculos"),
+                          onTap: () {
+                            Navigator.pushNamed(context, listaVehiculosRoute,arguments: ListaVehiculosArgs(preferences.email, true));
+                          }
+                        )
+                      
+                    
+                    :Container(child: null,),
                     ListTile(
                       leading: const Icon(Icons.pages, size: 20),
                       title: Text("Terminos y condiciones"),
                       onTap: () => {
-                        Navigator.pushNamed(context, terminosCondiciones)
+                        Navigator.pushNamed(context, terminosCondicionesRoute)
                       },
                     ),
                     SizedBox(height: 10),
@@ -136,13 +117,13 @@ class _MenuBarState extends State<MenuBar> {
   }
 
   void handleLogin() {
-    Navigator.pushNamed(context, login);
+    Navigator.pushNamed(context, loginRoute);
   }
 
   void handleLogOut() {
     preferences.clearPreference();
     appState.isInvitado = true;
-    Navigator.pushReplacementNamed(context, login);
+    Navigator.pushReplacementNamed(context, loginRoute);
   }
 
   Widget imageContainer(String link) {

@@ -9,8 +9,10 @@ import 'package:places_app/components/blur_container.dart';
 import 'package:places_app/models/usuario_model.dart';
 import 'package:places_app/pages/register_extra_page.dart';
 import 'package:places_app/providers/push_notification_provider.dart';
+import 'package:places_app/routes/arguments/register_extra_args.dart';
+import 'package:places_app/routes/constantes.dart';
 
-import 'package:places_app/routes/routes.dart';
+import 'package:places_app/routes/routes_generate.dart';
 import 'package:places_app/services/facebook_signin_service.dart';
 import 'package:places_app/services/google_signin_service.dart';
 import 'package:places_app/services/user_service.dart';
@@ -54,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
       preferences.email = _emailController.text;
 
       //Check user type
-      Navigator.of(context).popAndPushNamed(home);
+      Navigator.of(context).popAndPushNamed(homeRoute);
     }
   }
 
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
           await userService.checkTipousuario(_emailController.text);
       setSubmitting(false);
       _appState.isInvitado = false;
-      Navigator.of(context).popAndPushNamed(home);
+      Navigator.of(context).popAndPushNamed(homeRoute);
     } else if (userCredential == null && user != null) {
       //Caso para google
       Usuario userExtraData = await userService.getUsuario(user.email);
@@ -81,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
         preferences.tipoUsuario = userExtraData.tipoUsuario;
         setSubmitting(false);
         _appState.isInvitado = false;
-        Navigator.of(context).popAndPushNamed(home);
+        Navigator.of(context).popAndPushNamed(homeRoute);
       } else {
         //si no Debera llenarla
         final tokenPush = await _pushNotificationProvider.getToken();
@@ -98,10 +100,11 @@ class _LoginPageState extends State<LoginPage> {
             tokenPush: tokenPush);
         await userExtraData.save(user.email);
         setSubmitting(false);
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => RegisterExtraPage(user.email,true)));
+        Navigator.pushNamed(context, registerExtraRoute,arguments: RegisterExtraArgs(user.email, true));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => RegisterExtraPage(user.email,true)));
       }
     }
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:places_app/const/const.dart';
+import 'package:places_app/models/vehiculo_model.dart';
 import 'package:places_app/pages/quetepaso/slide_show.dart';
-import 'package:places_app/routes/routes.dart';
+import 'package:places_app/routes/constantes.dart';
+import 'package:places_app/routes/routes_generate.dart';
 import 'package:places_app/shared/user_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,8 +15,17 @@ enum TipoQueTePaso {
   MePusieronLaArana
 }
 
-class QueTePasoPage extends StatelessWidget {
+class QueTePasoPage extends StatefulWidget {
+  final VehiculoModel vehiculo;
+
+  const QueTePasoPage(this.vehiculo);
+  @override
+  _QueTePasoPageState createState() => _QueTePasoPageState();
+}
+
+class _QueTePasoPageState extends State<QueTePasoPage> {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   UserPreferences preferences = new UserPreferences();
 
   @override
@@ -48,7 +59,7 @@ class QueTePasoPage extends StatelessWidget {
           ),
           iconSize: 60,
           onPressed: () {
-            Navigator.popUntil(context, ModalRoute.withName(home));
+             Navigator.pushNamedAndRemoveUntil(context, homeRoute, (Route<dynamic> route) => false);
           },
         )
       ],
@@ -358,7 +369,8 @@ class QueTePasoPage extends StatelessWidget {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    preferences.numeroPoliza,
+                    widget.vehiculo.seguro,
+                    //preferences.numeroPoliza,
                     style: TextStyle(
                         color: kBaseTextTitle,
                         fontSize: 20,
@@ -387,7 +399,8 @@ class QueTePasoPage extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    preferences.telefonoPoliza,
+                    widget.vehiculo.telefonoSeguro,
+                    //preferences.telefonoPoliza,
                     style: TextStyle(color: Colors.white,fontSize: 20),
                   ),
                   Expanded(
@@ -400,7 +413,7 @@ class QueTePasoPage extends StatelessWidget {
                       ),
                       onPressed: () async {
                         final String phone =
-                            preferences.telefonoPoliza.split(" ").join("");
+                            widget.vehiculo.telefonoSeguro.split(" ").join("");
                         await launch("tel://$phone");
                       })
                 ],

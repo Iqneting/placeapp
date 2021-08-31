@@ -50,8 +50,8 @@ android {
         applicationId "com.iqneting.places_app"
         minSdkVersion 20
         targetSdkVersion 29
-        versionCode 2
-        versionName "1.1.0"
+        versionCode 3
+        versionName "1.1.1"
         multiDexEnabled true
 
     }

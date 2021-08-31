@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 void success(
   BuildContext context,
   String title,
-  String message, {
+  String message, 
+  bool barrierDismissible,
+  {
   Function f = null,
 }) {
   CoolAlert.show(
-    barrierDismissible: false,
+    barrierDismissible: barrierDismissible,
     context: context,
     type: CoolAlertType.success,
     title: title,

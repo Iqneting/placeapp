@@ -3,7 +3,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:places_app/components/web_view.dart';
 import 'package:places_app/data/Data.dart';
 import 'package:places_app/models/noticia_model.dart';
-import 'package:places_app/routes/routes.dart' as routes;
+import 'package:places_app/routes/constantes.dart';
+import 'package:places_app/routes/routes_generate.dart' as routes;
 import 'package:places_app/storage/App.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -71,7 +72,7 @@ class _NoticiasSliderState extends State<NoticiasSlider> {
     return GestureDetector(
       onTap: () {
         if (_appState.isInvitado) {
-          Navigator.pushNamed(context, routes.login);
+          Navigator.pushNamed(context, loginRoute);
         } else {
           Navigator.push(
             context,

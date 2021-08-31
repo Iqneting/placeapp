@@ -41,6 +41,10 @@ class Api {
     return ref.where(key, isEqualTo: value).get();
   }
 
+  Future<QuerySnapshot> getWhereWhere(String key1, String value1,String key2, String value2) {
+    return ref.where(key1, isEqualTo: value1).where(key2, isEqualTo: value2).get();
+  }
+
   Future<QuerySnapshot> orderBy(String key) {
     return ref
         .orderBy(
